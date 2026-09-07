@@ -67,9 +67,16 @@ to hold frame rate on weaker hardware.
 
 ## Deployment
 
-Pushing to `main` (or the development branch) publishes `index.html` to GitHub
-Pages via `.github/workflows/pages.yml`. Pages must be set to **Build and
-deployment → Source: GitHub Actions** in the repository settings.
+Pushing publishes `index.html` to GitHub Pages via
+`.github/workflows/pages.yml`.
+
+**One-time setup:** open
+<https://github.com/Wadie-Bch/gta-chinatown-casa/settings/pages> and set
+**Build and deployment → Source** to **GitHub Actions**. Until that is set the
+build job passes and the deploy job fails with `404 Not Found`, because the
+Pages site does not exist yet. Re-run the workflow after enabling it and the
+game goes live at
+`https://wadie-bch.github.io/gta-chinatown-casa/`.
 
 ## Note
 
