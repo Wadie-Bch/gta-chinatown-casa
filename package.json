@@ -1,0 +1,15 @@
+{
+  "name": "casa-wars",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Top-down 2.5D action game set in a fictional Casablanca. Single HTML file, no runtime dependencies.",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "start": "node build.mjs && node -e \"import('node:http').then(async h=>{const{readFile}=await import('node:fs/promises');h.createServer(async(q,s)=>{s.setHeader('content-type','text/html');s.end(await readFile('index.html'))}).listen(8080,()=>console.log('http://localhost:8080'))})\"",
+    "test": "node build.mjs && node tests/smoketest.mjs /tmp && node tests/uicheck.mjs && node tests/cartest.mjs /tmp && node tests/wintest.mjs /tmp"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.1"
+  }
+}
