@@ -2,3 +2,7 @@ node_modules/
 package-lock.json
 shot-*.png
 *.log
+
+# rendered masters - too large for git, regenerate with dream-src/render_mp4.py
+dream-a-city-with-no-flashing-light.mp4
+dream-city-share.mp4
