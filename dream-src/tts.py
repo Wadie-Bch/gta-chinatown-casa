@@ -2,7 +2,7 @@
 """Synthesise every narration line separately -> exact per-line timings."""
 import json, os, wave, numpy as np
 from piper import PiperVoice, SynthesisConfig
-from script import SHOTS, ACTS
+from script import SCENES as SHOTS, ACTS
 
 MODEL = "../models/en_US-norman-medium.onnx"
 SR    = 22050
@@ -10,7 +10,7 @@ OUT   = "lines"
 os.makedirs(OUT, exist_ok=True)
 
 # authored gaps, in RAW (pre-fingerprint) seconds
-G_LINE, G_SHOT, G_ACT, LEAD, TAIL = 0.26, 0.54, 2.15, 1.45, 3.00
+G_LINE, G_SHOT, G_ACT, LEAD, TAIL = 0.28, 0.62, 2.30, 1.50, 3.20
 
 voice = PiperVoice.load(MODEL)
 cfg = SynthesisConfig(length_scale=1.13, noise_scale=0.60, noise_w_scale=0.75,
@@ -56,7 +56,7 @@ for si, s in enumerate(SHOTS):
         pieces.append(("aud", a))
         lines_meta.append(dict(i=li, shot=si, act=s["act"], text=text, t=round(t, 4), d=round(d, 4)))
         t += d; li += 1
-        print(f"\r line {li:3d}/80  t={t:7.2f}s", end="", flush=True)
+        print(f"\r line {li:3d}/87  t={t:7.2f}s", end="", flush=True)
     shots_meta.append(dict(i=si, act=s["act"], t=round(shot_start, 4), d=round(t - shot_start, 4)))
 pieces.append(("sil", TAIL)); t += TAIL
 

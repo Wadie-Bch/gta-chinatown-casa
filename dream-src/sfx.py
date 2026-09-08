@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Fingerprint the voice, synthesise SFX + per-chapter drone bed, mix, encode."""
 import json, subprocess, numpy as np, wave, os
-from script import SHOTS, ACTS
+from script import SCENES as SHOTS, ACTS
 
 SR = 22050
 raw = np.load("narration_raw.npy")
@@ -114,7 +114,7 @@ def put(sig, t, g=1.0):
     j=min(sfxbuf.size, i+sig.size)
     sfxbuf[i:j] += (sig[:j-i]*g).astype(np.float32)
 
-MOVING = ("slow push-in","slow dolly left","slow dolly right","one smooth crane down")
+
 prev_act=None
 for si,(s,m) in enumerate(zip(SHOTS, T["shots"])):
     t = m["t"]
@@ -125,9 +125,9 @@ for si,(s,m) in enumerate(zip(SHOTS, T["shots"])):
         put(chime(1.9, 660 if s["act"]%2 else 784), t+0.06, 0.42)
     else:
         # hit lands on the camera move
-        if s["move"] in MOVING: put(whoosh(0.80, 300, 1400), t-0.52, 0.30)
-        else:                   put(thud(0.5, 58), t-0.06, 0.34)
-        if si%3==0: put(pop(), t+0.02, 0.22)
+        put(whoosh(0.70, 320, 1300), t-0.42, 0.24)
+        put(pop(0.11, 620), t+0.01, 0.30)
+        if s.get("big") or s.get("stat"): put(chime(1.3, 880), t+0.10, 0.30)
     if s.get("cap"): put(tick(), t+0.55, 0.9); put(tick(), t+0.62, 0.55)
 
 sfxbuf = sfxbuf[:vo.size]
