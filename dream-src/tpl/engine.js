@@ -19,7 +19,7 @@ addEventListener('resize',fit); addEventListener('orientationchange',fit); fit()
 /* ---------- LAYOUT SYSTEM (non-negotiable) ------------------------------
    Chapters are ROWS. Stages within a chapter are SGAP apart, serpentine, so
    every act change is a pure vertical move. Content may only sit on a band. */
-const SGAP=6000, ROWGAP=6200;
+const SGAP=5600, ROWGAP=3150;   /* == FW, FH : the frames tile. no void between them. */
 const DECOR=-2900, HEAD=-1780, SUB=-1540, ART=-380, CAP=520, LAND=1950;
 /* the composited frame: 16:9, HEAD+SUB land in its empty top third */
 const FCY=-800;                       /* the plate is centred on the shot framing point */
@@ -58,12 +58,6 @@ D.shots.forEach((s,i)=>{
   const reg=[];
   const RK=Math.max(.42,Math.min(1,s.dur/2.4));   /* short shots snap in */
 
-  /* -- DECOR band: world furniture above the frame -- */
-  const dec=G(g,`translate(0 ${DECOR})`);
-  E(dec,'line',{x1:-FW*.5,y1:0,x2:FW*.5,y2:0,stroke:A.hex,'stroke-opacity':.20,'stroke-width':3.1});
-  const dl=txt(dec,-46,('ACT '+s.act+'  /  SHOT '+String(i+1).padStart(2,'0')),'sl',44,A.hex,.55);
-  reg.push({el:dec,k:'fade',t0:-.88,d:.62});
-
   /* -- ART band: the footage plate. subject anchored at ART, top third clear -- */
   const clip='cl'+i;
   const cp=E(document.getElementById('defs'),'clipPath',{id:clip});
@@ -77,12 +71,8 @@ D.shots.forEach((s,i)=>{
   E(inner,'ellipse',{cx:0,cy:HZ-300,rx:FW*.55,ry:1050,fill:'url(#'+A.glow+')',opacity:.15});
   E(inner,'rect',{x:PL,y:PB-760,width:PR-PL,height:760,fill:'url(#fade)',opacity:.62});
   /* the subject anchor line is ART: everything below the empty top third */
-  reg.push({el:plateG,k:'pop',t0:-.82,d:.66});
   const ticks=[]; if(r&&r.tick)ticks.push(r.tick);
   /* stagger the plate's own masses so the shot assembles rather than cuts in */
-  const kids=[...inner.children];
-  kids.forEach((c,j)=>{ if(j<3)return;
-    reg.push({el:c,k:'fade',t0:-.64+Math.min(j,26)*.018,d:.34}); });
 
   /* -- typography, composited in post, band-locked -- */
   if(s.head||s.sub) scrim(plateG,FT,1420,'scrimT');
@@ -90,13 +80,6 @@ D.shots.forEach((s,i)=>{
   if(s.head){ pushReg(reg,RK,{el:H1(g,s.head,'#F2F7FD'),k:'rise',t0:.18,d:.66});
               if(s.sub) pushReg(reg,RK,{el:H2(g,s.sub,A.hex),k:'rise',t0:.36,d:.62}); }
   if(s.cap){  pushReg(reg,RK,{el:CP(g,s.cap,A.hex),k:'rise',t0:.52,d:.58}); }
-
-  /* -- LAND band: the shot slate -- */
-  const sl=G(g);
-  E(sl,'line',{x1:-FW*.42,y1:LAND-86,x2:FW*.42,y2:LAND-86,stroke:A.hex,'stroke-opacity':.26,'stroke-width':3.1});
-  SL(sl,s.grammar.toUpperCase()+'   ·   '+s.move.toUpperCase(),A.hex,0);
-  SL(sl,s.dur.toFixed(1)+'S   ·   '+D.acts[s.act-1].grade.toUpperCase().replace(/-/g,' '),'#9FB4C8',1);
-  pushReg(reg,RK,{el:sl,k:'fade',t0:.42,d:.6});
 
   SH.push({g:g,p:p,reg:reg,ticks:ticks,anims:anims,shot:s,st:-1});
 });
@@ -162,15 +145,7 @@ function camAt(vt){
   const e = b.k==='drift' ? (u<0?0:u>1?1:u*u*(3-2*u)*0.35+u*0.65) : eio(u);
   let x=a.x+(b.x-a.x)*e, y=a.y+(b.y-a.y)*e, z=a.z+(b.z-a.z)*e, r=a.r+(b.r-a.r)*e;
   /* transit pull-back, derived from the cull rule itself so both stages stay lit */
-  const dx=Math.abs(b.x-a.x)/2, dy=Math.abs(b.y-a.y)/2;
-  if(b.k!=='drift' && (dx>1||dy>1)){
-    let zm=Math.min(a.z,b.z)*0.62;
-    if(dx>1) zm=Math.min(zm, .78*960/dx);
-    if(dy>1) zm=Math.min(zm, .95*540/dy);
-    zm=Math.max(zm,.10);
-    const s=Math.pow(Math.sin(Math.PI*e),1.1);
-    z=z*(1-s)+zm*s;
-  }
+
   return {x:x,y:y,z:z,r:r,seg:a.i,e:e};
 }
 
@@ -189,7 +164,6 @@ let curAct=-1;
 function setAct(a){
   if(a===curAct)return; curAct=a;
   back.setAttribute('fill','url(#'+D.acc[D.acts[a-1].accent].sky+')');
-  document.getElementById('hudAct').textContent=D.acts[a-1].head;
 }
 
 /* ---------- scrubber ---------- */
@@ -240,10 +214,8 @@ function frame(){
   for(let i=0;i<SH.length;i++){
     const S=SH[i], near=Math.abs(i-idx)<=3;
     /* frame-relative cull. never a hand-picked constant. */
-    const dx=Math.abs(S.p.x-c.x), dy=Math.abs(S.p.y-c.y);
-    let ax=dx<=.78*hw?1:1-(dx-.78*hw)/(.24*hw);
-    let ay=dy<=.95*hh?1:1-(dy-.95*hh)/(.35*hh);
-    const a=Math.max(0,Math.min(1,ax))*Math.max(0,Math.min(1,ay));
+    const dx=Math.abs(S.p.x-c.x), dy=Math.abs(S.p.y+FCY-c.y);
+    const a=(dx<hw+FW*.5+40 && dy<hh+FH*.5+40)?1:0;
     if(a<=0.002){ if(S.st!==0){S.g.style.display='none';S.st=0;} continue; }
     if(S.st===0){S.g.style.display='';}
     S.st=1; S.g.style.opacity=a;
@@ -271,7 +243,6 @@ function frame(){
   /* chrome */
   const p=at/(au.duration||D.dur);
   fill.style.width=(p*100)+'%'; head.style.left=(p*100)+'%';
-  document.getElementById('hudT').textContent=tc(at)+' / '+tc(au.duration||D.dur);
   requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);

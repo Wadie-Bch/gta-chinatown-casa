@@ -1,6 +1,6 @@
-# DREAM — "A Job With No CV"
+# DREAM — "A Pocket With No Thief"
 
-Build pipeline for the episode. `dream-a-job-with-no-cv.html` is the finished
+Build pipeline for the episode. `dream-a-pocket-with-no-thief.html` is the finished
 self-contained artifact (audio + fonts embedded; runs offline from the one file).
 
     python3 tts.py     # per-line Piper synthesis -> exact timings

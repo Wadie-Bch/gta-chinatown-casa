@@ -17,12 +17,13 @@ wav_write("narration_raw.wav", raw)
 
 # ---------------------------------------------------------------- 1. VOICE FINGERPRINT
 # pitch -6% (asetrate 0.94) / net pace +6% (atempo 1.128) / EQ / comp / limit
-CHAIN = ("asetrate=22050*0.94,aresample=22050,atempo=1.045,"
-         "equalizer=f=110:width_type=q:w=0.9:g=3.6,"
-         "equalizer=f=320:width_type=q:w=1.1:g=-3.1,"
-         "equalizer=f=2700:width_type=q:w=0.8:g=3.4,"
-         "acompressor=threshold=-18dB:ratio=3:attack=8:release=180:makeup=2,"
-         "alimiter=limit=0.94")
+CHAIN = ("asetrate=22050*0.972,aresample=22050,atempo=1.012,"      # gentle -2.8% pitch, easy pace
+         "equalizer=f=140:width_type=q:w=1.0:g=1.4,"                # a little chest, not a boom
+         "equalizer=f=330:width_type=q:w=1.2:g=-2.2,"               # clear the mud
+         "equalizer=f=3200:width_type=q:w=1.1:g=2.2,"               # articulation, not edge
+         "equalizer=f=7200:width_type=q:w=1.4:g=-1.6,"              # take the hiss off the s
+         "acompressor=threshold=-15dB:ratio=1.9:attack=22:release=260:makeup=1.5,"
+         "alimiter=limit=0.95")
 subprocess.run(["ffmpeg","-y","-v","error","-i","narration_raw.wav","-af",CHAIN,
                 "-ar",str(SR),"-ac","1","narration_fp.wav"], check=True)
 
@@ -132,11 +133,11 @@ for si,(s,m) in enumerate(zip(SHOTS, T["shots"])):
 sfxbuf = sfxbuf[:vo.size]
 
 # ---------------------------------------------------------------- 5. MIX + MASTER
-mix = vo*1.0 + sfxbuf*0.42 + bed
+mix = vo*1.0 + sfxbuf*0.30 + bed*0.8
 peak=np.max(np.abs(mix)); print("pre-master peak", round(float(peak),3))
 wav_write("mix.wav", mix/max(1.0,peak/0.98))
 subprocess.run(["ffmpeg","-y","-v","error","-i","mix.wav",
-                "-af","alimiter=limit=0.96,loudnorm=I=-15:TP=-1.2:LRA=11",
+                "-af","alimiter=limit=0.96,loudnorm=I=-16:TP=-1.5:LRA=12",
                 "-c:a","libmp3lame","-b:a","88k","-ac","1","-ar","22050","narration.mp3"], check=True)
 sz=os.path.getsize("narration.mp3")
 d=float(subprocess.run(["ffprobe","-v","error","-show_entries","format=duration","-of","csv=p=0","narration.mp3"],

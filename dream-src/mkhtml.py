@@ -18,17 +18,17 @@ def warp(at):
 def h(s, n):   # deterministic jitter, never random at build time
     return int(hashlib.md5((s+str(n)).encode()).hexdigest()[:8],16)/0xFFFFFFFF
 
-ZFILL = 1920/5600.0                       # plate exactly fills the 16:9 frame
-Z = {"locked-off hold":0.374,"slow push-in":0.392,"slow dolly left":0.364,
-     "slow dolly right":0.364,"one smooth crane down":0.358}
-CX= {"slow dolly left":-260,"slow dolly right":260}
+ZFILL = 1920/5600.0   # plate == frame                       # plate exactly fills the 16:9 frame
+Z = {"locked-off hold":0.352,"slow push-in":0.360,"slow dolly left":0.348,
+     "slow dolly right":0.348,"one smooth crane down":0.346}
+CX= {"slow dolly left":-150,"slow dolly right":150}
 
 shots=[]
 for i,(s,m) in enumerate(zip(SHOTS,T["shots"])):
     a=ACTS[s["act"]-1]; j=h(s["plate"]["k"],i)
     if s["head"]:  z,cx,rot = ZFILL, 0, 0.0
-    elif s["cap"]: z,cx,rot = ZFILL+0.006, CX.get(s["move"],0)*0.35, (j-0.5)*0.9
-    else:          z,cx,rot = Z[s["move"]]+0.022*(j-0.5), CX.get(s["move"],0), (j-0.5)*1.9
+    elif s["cap"]: z,cx,rot = ZFILL+0.002, CX.get(s["move"],0)*0.25, (j-0.5)*0.5
+    else:          z,cx,rot = Z[s["move"]]+0.010*(j-0.5), CX.get(s["move"],0)*0.5, (j-0.5)*1.0
     shots.append(dict(
         act=s["act"], accent=a["accent"], plate=s["plate"], grammar=s["grammar"],
         move=s["move"], lines=s["lines"], head=s["head"], sub=s["sub"], cap=s["cap"],
@@ -80,7 +80,7 @@ fb=json.load(open("fonts_b64.json"))
 css=css.replace("__OSWALD__",fb["Oswald"]).replace("__ARCHIVO__",fb["Archivo"])
 b64=base64.b64encode(open("narration.mp3","rb").read()).decode()
 
-HTML=f"""<title>A Job With No CV</title>
+HTML=f"""<title>A Pocket With No Thief</title>
 <style>{css}</style>
 <div id="wrap"><div id="stage">
 <svg id="svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
@@ -91,15 +91,13 @@ HTML=f"""<title>A Job With No CV</title>
   <rect x="0" y="0" width="1920" height="1080" filter="url(#grain)" opacity=".13"
         style="mix-blend-mode:overlay;pointer-events:none"/>
 </svg>
-<div id="tag">{CHANNEL}<i>one system that quietly runs earth</i></div>
-<div id="hud"><span id="hudT">00:00 / 00:00</span><b id="hudAct">&nbsp;</b></div>
 <div id="vig"></div>
-<button id="sbtn">shot sheet</button>
+<button id="sbtn">shots</button>
 <div id="bar"><div class="track"><div class="fill"></div><div class="head"></div></div></div>
 <div id="gate"><div class="gin">
-  <div class="gk">Dream · episode 09</div>
-  <div class="gt">A Job With<br>No CV</div>
-  <div class="gs">the one page that decides who gets to work</div>
+  <div class="gk">Dream · episode 10</div>
+  <div class="gt">A Pocket<br>With No Thief</div>
+  <div class="gs">the oldest security system on earth, and the only one never upgraded</div>
   <div class="gb"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>play</div>
   <div class="gmeta">{len(shots)} shots · {int(DUR//60)}m {int(DUR%60):02d}s · headphones recommended</div>
 </div></div>
@@ -115,7 +113,7 @@ HTML=f"""<title>A Job With No CV</title>
 <script>{open('tpl/plates.js').read()}</script>
 <script>{open('tpl/engine.js').read()}</script>
 """
-out="/home/user/gta-chinatown-casa/dream-a-job-with-no-cv.html"
+out="/home/user/gta-chinatown-casa/dream-a-pocket-with-no-thief.html"
 open(out,"w").write(HTML)
 print(f"WROTE {out}  {os.path.getsize(out)/1e6:.2f} MB   shots={len(shots)} dur={DUR:.1f}s")
 print("warp anchors:", [f"{a:.2f}->{v:.2f}" for a,v in zip(WA,WV)])
