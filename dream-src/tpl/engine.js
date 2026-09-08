@@ -70,8 +70,9 @@ D.shots.forEach((s,i)=>{
   E(cp,'rect',{x:-FW/2,y:FT,width:FW,height:FH,rx:6});
   const plateG=E(g,'g',{'clip-path':'url(#'+clip+')'});
   const inner=G(plateG,`translate(0 ${FCY})`);
-  reseed(i+7); CA=A;
+  reseed(i+7); CA=A; CG=s.grammar; AN=[];
   const r=P[s.plate.k](inner,A,s.plate);
+  const anims=AN; AN=[];
   /* atmosphere: one dominant accent washing the frame, then crushed blacks */
   E(inner,'ellipse',{cx:0,cy:HZ-300,rx:FW*.55,ry:1050,fill:'url(#'+A.glow+')',opacity:.15});
   E(inner,'rect',{x:PL,y:PB-760,width:PR-PL,height:760,fill:'url(#fade)',opacity:.62});
@@ -97,7 +98,7 @@ D.shots.forEach((s,i)=>{
   SL(sl,s.dur.toFixed(1)+'S   ·   '+D.acts[s.act-1].grade.toUpperCase().replace(/-/g,' '),'#9FB4C8',1);
   pushReg(reg,RK,{el:sl,k:'fade',t0:.42,d:.6});
 
-  SH.push({g:g,p:p,reg:reg,ticks:ticks,shot:s,st:-1});
+  SH.push({g:g,p:p,reg:reg,ticks:ticks,anims:anims,shot:s,st:-1});
 });
 
 /* ---------- REG kinds ---------- */
@@ -127,14 +128,27 @@ function warp(at){
 
 /* ---------- CAMERA: keyframes, then HOLD-THEN-CROSS ---------- */
 const CROSS=0.80;
-let KF=D.shots.map((s,i)=>({t:s.vt, x:POS[i].x+s.cx, y:POS[i].y-800, z:s.z, r:s.rot, i:i}));
-(function holdThenCross(){                    /* rest on the beat, then move with intent */
+/* the shot's own move, executed across its whole duration */
+function driftOf(s){
+  switch(s.move){
+    case 'slow push-in':          return {dx:0,   dy:-40, dz:1.115};
+    case 'slow dolly left':       return {dx:-760,dy:0,   dz:1.018};
+    case 'slow dolly right':      return {dx: 760,dy:0,   dz:1.018};
+    case 'one smooth crane down': return {dx:0,   dy: 640,dz:1.030};
+    default:                      return {dx:0,   dy:-18, dz:1.042};  /* locked-off still breathes */
+  }
+}
+let KF=D.shots.map((s,i)=>({t:s.vt, x:POS[i].x+s.cx, y:POS[i].y-800, z:s.z, r:s.rot, i:i, k:'in'}));
+(function driftThenCross(){        /* move slowly through the shot, then cross with intent */
   const out=[];
   for(let i=0;i<KF.length;i++){
     out.push(KF[i]);
     if(i<KF.length-1){
-      const c=Math.min(CROSS, (KF[i+1].t-KF[i].t)*0.38);
-      out.push(Object.assign({},KF[i],{t:KF[i+1].t-c, hold:true}));
+      const gap=KF[i+1].t-KF[i].t;
+      const c=Math.min(CROSS, gap*0.34);
+      const d=driftOf(D.shots[i]);
+      out.push({t:KF[i+1].t-c, i:i, k:'drift',
+        x:KF[i].x+d.dx, y:KF[i].y+d.dy, z:KF[i].z*d.dz, r:KF[i].r+(D.shots[i].rot>0?0.5:-0.5)});
     }
   }
   KF=out;
@@ -143,11 +157,13 @@ function camAt(vt){
   let i=0; while(i<KF.length-1 && vt>=KF[i+1].t) i++;
   const a=KF[i], b=KF[Math.min(i+1,KF.length-1)];
   if(a===b||b.t<=a.t) return {x:a.x,y:a.y,z:a.z,r:a.r,seg:a.i,e:1};
-  const e=eio((vt-a.t)/(b.t-a.t));
+  const u=(vt-a.t)/(b.t-a.t);
+  /* a drift is near-linear so it reads as a moving camera; a cross eases in and out */
+  const e = b.k==='drift' ? (u<0?0:u>1?1:u*u*(3-2*u)*0.35+u*0.65) : eio(u);
   let x=a.x+(b.x-a.x)*e, y=a.y+(b.y-a.y)*e, z=a.z+(b.z-a.z)*e, r=a.r+(b.r-a.r)*e;
   /* transit pull-back, derived from the cull rule itself so both stages stay lit */
   const dx=Math.abs(b.x-a.x)/2, dy=Math.abs(b.y-a.y)/2;
-  if(dx>1||dy>1){
+  if(b.k!=='drift' && (dx>1||dy>1)){
     let zm=Math.min(a.z,b.z)*0.62;
     if(dx>1) zm=Math.min(zm, .78*960/dx);
     if(dy>1) zm=Math.min(zm, .95*540/dy);
@@ -236,6 +252,8 @@ function frame(){
       const lt=vt-S.shot.vt;
       for(const r of S.reg) applyReg(r, ease((lt-r.t0)/r.d));
       for(const t of S.ticks) t(vt);
+      const pr=Math.max(0,Math.min(1,lt/S.shot.dur));
+      for(const q of S.anims) q.f(pr,vt);
       S.fin=false;
     } else if(!S.fin){
       for(const r of S.reg) applyReg(r,1); S.fin=true;

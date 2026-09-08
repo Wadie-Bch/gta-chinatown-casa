@@ -1,6 +1,6 @@
 # DREAM — “A Job With No CV” · shot generation sheet
 
-56 shots · 9 acts · runtime 4m36s
+56 shots · 9 acts · runtime 5m30s
 
 The image layer is photoreal AI-generated footage. These are the prompts to generate it.
 Every prompt is prefixed with the style bible and ends with the no-text clause: video models cannot render legible words, so **the top third of every frame is left empty** and all headlines, chapter cards and captions are composited in post on the band layout (DECOR −2900 / HEAD −1780 / SUB −1540 / ART −380 / CAP 520 / LAND 1950).
@@ -17,7 +17,7 @@ Every prompt is prefixed with the style bible and ends with the no-text clause: 
 
 Piper `en_US-norman-medium` — LibriVox corpus, **public domain**, trained from scratch (no lessac inheritance, no CC-BY-NC contamination). Commercially clean.
 
-Fingerprint chain: `asetrate=22050*0.94,aresample=22050,atempo=1.128,equalizer=f=110:width_type=q:w=0.9:g=3.6,equalizer=f=320:width_type=q:w=1.1:g=-3.1,equalizer=f=2700:width_type=q:w=0.8:g=3.4,acompressor=threshold=-18dB:ratio=3:attack=8:release=180:makeup=2,alimiter=limit=0.94`
+Fingerprint chain: `asetrate=22050*0.94,aresample=22050,atempo=1.045,equalizer=f=110:width_type=q:w=0.9:g=3.6,equalizer=f=320:width_type=q:w=1.1:g=-3.1,equalizer=f=2700:width_type=q:w=0.8:g=3.4,acompressor=threshold=-18dB:ratio=3:attack=8:release=180:makeup=2,alimiter=limit=0.94`
 
 
 ---
@@ -30,7 +30,7 @@ Fingerprint chain: `asetrate=22050*0.94,aresample=22050,atempo=1.128,equalizer=f
 
 | | |
 |---|---|
-| **duration** | 4.4s (in at 0:01.27) |
+| **duration** | 5.4s (in at 0:01.48) |
 | **dream move** | Wrong Scale |
 | **camera** | slow push-in |
 | **subject** | a single sheet of white paper standing upright in the middle of an empty night street, four storeys tall, lit like a monument, a lone man in a coat standing at its base looking up, his back to camera |
@@ -45,7 +45,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 2.9s (in at 0:06.01) |
+| **duration** | 3.5s (in at 0:07.46) |
 | **dream move** | Soft Erasure |
 | **camera** | locked-off hold |
 | **subject** | close on a man's hands on a kitchen table at night pressing flat a single sheet of paper; as he smooths it, the ink lifts off the page and drifts upward as fine dust, leaving the sheet blank |
@@ -60,7 +60,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 3.3s (in at 0:09.26) |
+| **duration** | 3.6s (in at 0:11.53) |
 | **dream move** | The Freeze |
 | **camera** | slow dolly right |
 | **subject** | a wide open-plan office at night, forty people frozen mid-motion at their desks, one woman still moving, picking up a sheet of paper and putting it down again |
@@ -75,7 +75,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 1.2s (in at 0:12.92) |
+| **duration** | 1.2s (in at 0:15.69) |
 | **dream move** | Object Rain |
 | **camera** | one smooth crane down |
 | **subject** | thousands of sheets of paper falling slowly through a vast dark atrium like snow, a single figure standing in the centre with arms at their sides, unmoved |
@@ -97,7 +97,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 3.2s (in at 0:15.95) |
+| **duration** | 3.7s (in at 0:19.08) |
 | **dream move** | The Swap |
 | **camera** | slow push-in |
 | **subject** | a man standing in an empty white-grey room slowly flattening, without a cut, into a single sheet of paper that hangs in the air where he stood; his shadow on the floor stays human |
@@ -112,7 +112,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 7.6s (in at 0:19.50) |
+| **duration** | 9.0s (in at 0:23.35) |
 | **dream move** | Wrong Scale |
 | **camera** | slow dolly left |
 | **subject** | an enormous industrial press in a cold empty hall slowly compressing a mountain of household objects, photographs, tools and clothes down into one thin white rectangle |
@@ -127,7 +127,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 5.9s (in at 0:27.47) |
+| **duration** | 6.9s (in at 0:32.87) |
 | **dream move** | The Repeat |
 | **camera** | locked-off hold |
 | **subject** | a sorting table where identical pairs of hands repeatedly place objects into two piles; the left pile is three small identical white cards, the right pile is everything else and it is enormous |
@@ -142,7 +142,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 3.5s (in at 0:33.79) |
+| **duration** | 3.8s (in at 0:40.31) |
 | **dream move** | The Slow Crowd |
 | **camera** | slow dolly right |
 | **subject** | a long corridor of identical closed office doors receding into darkness, each with an empty nameplate, a man walking past them without stopping |
@@ -157,7 +157,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 7.9s (in at 0:37.72) |
+| **duration** | 9.8s (in at 0:44.66) |
 | **dream move** | Soft Erasure |
 | **camera** | slow push-in |
 | **subject** | a woman playing a piano in an empty hall; as she plays, her hands and then the piano dissolve into fine paper dust that drifts away, the sound implied by the motion of the vanishing keys |
@@ -179,7 +179,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 1.7s (in at 0:47.43) |
+| **duration** | 2.1s (in at 0:56.65) |
 | **dream move** | Folded Space |
 | **camera** | slow push-in |
 | **subject** | a man posts a single envelope into a slot in a plain wall; the camera pushes through the slot into a vast grey sorting hall on the other side that could not possibly fit behind that wall |
@@ -194,7 +194,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 5.1s (in at 0:49.55) |
+| **duration** | 6.1s (in at 0:59.33) |
 | **dream move** | Wrong Scale |
 | **camera** | one smooth crane down |
 | **subject** | an immense metal funnel the size of a cathedral, paper pouring into its mouth from above, and at the narrow bottom a single thin stream of sheets emerging; no people anywhere |
@@ -209,7 +209,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 2.6s (in at 0:55.02) |
+| **duration** | 2.9s (in at 1:06.00) |
 | **dream move** | The Repeat |
 | **camera** | locked-off hold |
 | **subject** | a machine arm in close-up rapidly stamping identical marks onto passing sheets of paper on a conveyor, never pausing, occasionally flicking one sheet into a bin below |
@@ -224,7 +224,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 3.6s (in at 0:58.01) |
+| **duration** | 4.1s (in at 1:09.47) |
 | **dream move** | The Slow Crowd |
 | **camera** | slow dolly left |
 | **subject** | a hall of identical grey filing cabinets stretching beyond the frame, hundreds of drawers opening and closing in perfect unison, no operator visible |
@@ -239,7 +239,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 3.1s (in at 1:01.98) |
+| **duration** | 3.4s (in at 1:14.11) |
 | **dream move** | Wrong Scale |
 | **camera** | slow push-in |
 | **subject** | a woman at a small desk holding a stack of paper so tall it disappears up out of frame into darkness above her |
@@ -254,7 +254,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 2.9s (in at 1:05.44) |
+| **duration** | 3.3s (in at 1:18.04) |
 | **dream move** | The Repeat |
 | **camera** | locked-off hold |
 | **subject** | close on two hands dealing sheets of paper into two piles at metronomic speed; the rejected pile grows until it fills the lower half of frame, the accepted pile stays at three sheets |
@@ -269,7 +269,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 4.6s (in at 1:08.69) |
+| **duration** | 5.6s (in at 1:21.94) |
 | **dream move** | The Freeze |
 | **camera** | slow dolly right |
 | **subject** | a room of forty candidates all frozen mid-gesture in the act of speaking about themselves, mouths open, hands raised; dust hangs motionless in the air |
@@ -291,7 +291,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 2.6s (in at 1:15.10) |
+| **duration** | 2.7s (in at 1:29.77) |
 | **dream move** | Time Slip |
 | **camera** | slow push-in |
 | **subject** | a wide exterior of a plain civic building at dawn where the light races through an entire day in one continuous shot, shadows sweeping across the steps, people arriving and leaving in smooth unbroken motion |
@@ -306,7 +306,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 6.6s (in at 1:18.08) |
+| **duration** | 7.3s (in at 1:33.04) |
 | **dream move** | The Repeat |
 | **camera** | slow dolly left |
 | **subject** | a formal drawing room where the same handshake between two well-dressed men repeats over and over, each time with slightly different men, always the same handshake, always the same room |
@@ -321,7 +321,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 3.1s (in at 1:25.08) |
+| **duration** | 3.3s (in at 1:40.93) |
 | **dream move** | Folded Space |
 | **camera** | slow push-in |
 | **subject** | a plain wooden door in a stone wall opening onto a warm lit room; a stranger with a small case steps through, and the door behind them opens again onto the same room, and again |
@@ -336,7 +336,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 4.6s (in at 1:28.60) |
+| **duration** | 5.4s (in at 1:44.76) |
 | **dream move** | Object Rain |
 | **camera** | one smooth crane down |
 | **subject** | seen from very high above, sheets of paper falling upward from every rooftop of a vast city, rising into a gold-lit sky in their millions |
@@ -351,7 +351,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 3.7s (in at 1:33.62) |
+| **duration** | 4.5s (in at 1:50.71) |
 | **dream move** | The Swap |
 | **camera** | locked-off hold |
 | **subject** | a single sheet of paper resting on a table; the room around it changes without a cut - office, workshop, farmhouse, laboratory - while the paper and the framing stay exactly the same |
@@ -366,7 +366,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 3.7s (in at 1:37.68) |
+| **duration** | 4.4s (in at 1:55.72) |
 | **dream move** | The Freeze |
 | **camera** | slow push-in |
 | **subject** | two men mid-handshake frozen completely still in a warm room while a third person walks slowly around them examining the handshake from every side |
@@ -381,7 +381,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 6.7s (in at 1:41.79) |
+| **duration** | 7.9s (in at 2:00.64) |
 | **dream move** | Time Slip |
 | **camera** | slow dolly right |
 | **subject** | a long queue of ordinary people outside a factory gate at dawn, the light racing forward through decades, their clothing changing smoothly on the same bodies while the queue never breaks |
@@ -403,7 +403,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 1.3s (in at 1:50.26) |
+| **duration** | 1.4s (in at 2:10.71) |
 | **dream move** | Soft Erasure |
 | **camera** | locked-off hold |
 | **subject** | a sheet of paper on a table beginning to crack down the middle like dry clay, the two halves separating slightly, dust falling from the fracture |
@@ -418,7 +418,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 3.7s (in at 1:51.92) |
+| **duration** | 4.8s (in at 2:12.69) |
 | **dream move** | The Swap |
 | **camera** | slow push-in |
 | **subject** | a man welding in a workshop, sparks falling; without a cut the welding torch in his hand becomes a pen, and the workshop becomes a plain white interview room, his posture unchanged |
@@ -433,7 +433,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 3.3s (in at 1:55.99) |
+| **duration** | 3.9s (in at 2:18.06) |
 | **dream move** | The Repeat |
 | **camera** | slow dolly left |
 | **subject** | two identical rooms side by side seen through a cutaway wall; in one a woman works with her hands on a complex machine, in the other she sits still and speaks; the speaking room is brightly lit, the working room is going dark |
@@ -448,7 +448,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 4.7s (in at 1:59.66) |
+| **duration** | 5.5s (in at 2:22.50) |
 | **dream move** | The Slow Crowd |
 | **camera** | locked-off hold |
 | **subject** | thirty people standing in rows in a dim hall, all speaking at once in perfect unison with identical hand gestures, one person at the back silent with their hands at their sides |
@@ -463,7 +463,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 3.8s (in at 2:04.75) |
+| **duration** | 4.6s (in at 2:28.50) |
 | **dream move** | The Freeze |
 | **camera** | slow push-in |
 | **subject** | an interview table where one candidate is mid-gesture, animated and confident, while beside them a second candidate is completely frozen, and the panel is turned only towards the one who moves |
@@ -478,7 +478,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 3.7s (in at 2:08.93) |
+| **duration** | 4.2s (in at 2:33.69) |
 | **dream move** | Object Rain |
 | **camera** | one smooth crane down |
 | **subject** | coins falling in a thin steady stream from a dark ceiling onto a plain white sheet of paper on a table below, piling up and spilling off the edges |
@@ -500,7 +500,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 0.9s (in at 2:14.39) |
+| **duration** | 0.9s (in at 2:40.07) |
 | **dream move** | Wrong Scale |
 | **camera** | slow dolly right |
 | **subject** | a man standing at the edge of an enormous rectangular void cut clean out of a paved plaza, the hole is the exact proportions of a sheet of paper and it is bottomless |
@@ -515,7 +515,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 3.6s (in at 2:15.68) |
+| **duration** | 4.3s (in at 2:41.49) |
 | **dream move** | The Slow Crowd |
 | **camera** | locked-off hold |
 | **subject** | hundreds of people walking in a single unbroken line across a wet plaza in perfect step, never slowing, rain falling hard, nobody carrying an umbrella |
@@ -530,7 +530,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 4.7s (in at 2:19.64) |
+| **duration** | 5.0s (in at 2:46.35) |
 | **dream move** | The Freeze |
 | **camera** | slow push-in |
 | **subject** | the same marching crowd, now completely frozen mid-step, while one woman kneels on the wet ground holding a small child; she is the only thing moving in frame |
@@ -545,7 +545,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 3.3s (in at 2:24.70) |
+| **duration** | 4.0s (in at 2:51.94) |
 | **dream move** | Soft Erasure |
 | **camera** | locked-off hold |
 | **subject** | a man sitting alone on the edge of a bed in a dim room, rain on the window; the room around him slowly dissolves into drifting paper dust while he stays solid and still |
@@ -560,7 +560,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 4.2s (in at 2:28.37) |
+| **duration** | 4.9s (in at 2:56.50) |
 | **dream move** | Wrong Scale |
 | **camera** | slow push-in |
 | **subject** | extreme close on a sheet of paper with a rectangular hole burned through its centre; through the hole, far below, a person is falling away into darkness |
@@ -575,7 +575,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 5.3s (in at 2:32.91) |
+| **duration** | 6.3s (in at 3:01.91) |
 | **dream move** | The Repeat |
 | **camera** | slow dolly left |
 | **subject** | three identical rooms in a row seen through cutaway walls: in the first a person cares for someone in bed, in the second a person builds something and it collapses, in the third a person stands back up; all three rooms have their doors slammed shut in unison |
@@ -590,7 +590,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 6.4s (in at 2:38.59) |
+| **duration** | 7.4s (in at 3:08.74) |
 | **dream move** | The Slow Crowd |
 | **camera** | one smooth crane down |
 | **subject** | a crowd of people standing perfectly still in a storm, all facing the same direction, none of them stepping forward onto the empty ground ahead of them |
@@ -612,7 +612,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 1.9s (in at 2:46.76) |
+| **duration** | 2.3s (in at 3:18.30) |
 | **dream move** | The Swap |
 | **camera** | slow push-in |
 | **subject** | a sheet of paper on a desk in a dark room; without a cut it becomes a glowing rectangle of screen light, then another, then a wall of them, filling the room |
@@ -627,7 +627,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 6.4s (in at 2:49.06) |
+| **duration** | 7.2s (in at 3:21.18) |
 | **dream move** | The Repeat |
 | **camera** | locked-off hold |
 | **subject** | a printer in a dark room ejecting identical sheets faster and faster until they form a continuous ribbon of paper flowing across the floor and out of frame |
@@ -642,7 +642,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 5.8s (in at 2:55.80) |
+| **duration** | 7.0s (in at 3:28.95) |
 | **dream move** | Wrong Scale |
 | **camera** | one smooth crane down |
 | **subject** | an impossibly tall wall of stacked grey server racks, and pressed against it a tide of paper rising steadily up the wall like floodwater |
@@ -657,7 +657,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 6.2s (in at 3:02.01) |
+| **duration** | 7.2s (in at 3:36.46) |
 | **dream move** | Folded Space |
 | **camera** | slow dolly right |
 | **subject** | two identical dark rooms facing each other through an open doorway, each containing a machine feeding paper to the other in a closed loop, no person present in either room |
@@ -672,7 +672,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 2.6s (in at 3:08.56) |
+| **duration** | 3.0s (in at 3:44.24) |
 | **dream move** | Soft Erasure |
 | **camera** | slow push-in |
 | **subject** | a vast drift of paper filling a dark hall to waist height, slowly disintegrating into grey dust that hangs in the air and dims the light |
@@ -687,7 +687,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 6.3s (in at 3:11.53) |
+| **duration** | 7.4s (in at 3:47.77) |
 | **dream move** | The Repeat |
 | **camera** | locked-off hold |
 | **subject** | a single sheet of paper being reproduced over and over on a dark table, each copy appearing instantly beside the last until the table and then the whole frame is covered |
@@ -709,7 +709,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 0.6s (in at 3:19.59) |
+| **duration** | 0.9s (in at 3:57.36) |
 | **dream move** | The Freeze |
 | **camera** | locked-off hold |
 | **subject** | a single empty chair in the centre of a vast dark hall, one shaft of dusk light on it, dust motes completely frozen in mid-air around it |
@@ -724,7 +724,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 6.5s (in at 3:20.60) |
+| **duration** | 7.3s (in at 3:58.86) |
 | **dream move** | The Swap |
 | **camera** | slow push-in |
 | **subject** | a small paper photograph of a person on a table; without a cut the photograph becomes the actual person, small and standing on the table, then becomes the photograph again |
@@ -739,7 +739,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 5.8s (in at 3:27.46) |
+| **duration** | 6.6s (in at 4:06.73) |
 | **dream move** | Time Slip |
 | **camera** | slow dolly left |
 | **subject** | a workshop bench at dusk where a finished object sits; the light races backward through the whole day revealing every stage of its making in one continuous unbroken shot |
@@ -754,7 +754,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 4.7s (in at 3:33.68) |
+| **duration** | 5.9s (in at 4:13.93) |
 | **dream move** | Wrong Scale |
 | **camera** | one smooth crane down |
 | **subject** | an enormous stone institutional building resting its entire weight on a single sheet of paper at ground level, the paper not bending |
@@ -769,7 +769,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 6.1s (in at 3:38.78) |
+| **duration** | 7.1s (in at 4:20.41) |
 | **dream move** | The Slow Crowd |
 | **camera** | slow push-in |
 | **subject** | a row of figures in silhouette standing shoulder to shoulder in front of a wall of filing cabinets, all with arms folded, all turning their heads to camera in perfect unison |
@@ -791,7 +791,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 2.4s (in at 3:46.71) |
+| **duration** | 2.7s (in at 4:29.70) |
 | **dream move** | Time Slip |
 | **camera** | slow push-in |
 | **subject** | an empty room at first light where the sun rises fully in one continuous shot, the shadows retreating across a bare floor to reveal a plain table and two chairs facing each other |
@@ -806,7 +806,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 7.1s (in at 3:49.51) |
+| **duration** | 7.8s (in at 4:32.97) |
 | **dream move** | The Swap |
 | **camera** | locked-off hold |
 | **subject** | two people at a plain table; a sheet of paper between them becomes a set of real tools and materials, and both pairs of hands begin working on it together |
@@ -821,7 +821,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 7.7s (in at 3:57.01) |
+| **duration** | 8.8s (in at 4:41.30) |
 | **dream move** | Object Rain |
 | **camera** | slow dolly right |
 | **subject** | small solid metal objects falling gently upward from a workbench into a gold-lit sky, each one settling into a slow orbit above the bench rather than drifting away |
@@ -836,7 +836,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 6.3s (in at 4:05.03) |
+| **duration** | 7.3s (in at 4:50.69) |
 | **dream move** | Soft Erasure |
 | **camera** | slow push-in |
 | **subject** | a long unbroken horizontal line of paper stretched across a bright room dissolving away into light from both ends towards the middle, leaving a row of solid objects standing where it was |
@@ -851,7 +851,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 6.2s (in at 4:11.75) |
+| **duration** | 9.2s (in at 4:58.50) |
 | **dream move** | Folded Space |
 | **camera** | locked-off hold |
 | **subject** | a plain door opening onto a room with a finished piece of work on a table and nobody in it; the door closes and opens again onto the same room, now with a person standing beside the work |
@@ -866,7 +866,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 6.6s (in at 4:18.31) |
+| **duration** | 8.2s (in at 5:08.25) |
 | **dream move** | Wrong Scale |
 | **camera** | one smooth crane down |
 | **subject** | an enormous pair of balance scales in a gold-lit hall; one pan holds a mountain of paper, the other holds a single small finished object, and the small object is heavier |
@@ -881,7 +881,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 5.4s (in at 4:25.28) |
+| **duration** | 6.7s (in at 5:16.96) |
 | **dream move** | The Swap |
 | **camera** | slow push-in |
 | **subject** | a man holding a paper photograph of himself at arm's length; the photograph goes blank and the real room behind it comes into focus, full of his actual finished work |
@@ -896,7 +896,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 1.1s (in at 4:31.08) |
+| **duration** | 1.3s (in at 5:24.17) |
 | **dream move** | Soft Erasure |
 | **camera** | locked-off hold |
 | **subject** | a hand placing a blank sheet of paper face down on a table and lifting away; the paper dissolves quietly into light, leaving the bare table in morning sun |
@@ -911,7 +911,7 @@ Photoreal cinematic footage that behaves like a dream. Shot on 35mm anamorphic, 
 
 | | |
 |---|---|
-| **duration** | 0.8s (in at 4:32.53) |
+| **duration** | 1.0s (in at 5:26.05) |
 | **dream move** | Folded Space |
 | **camera** | slow push-in |
 | **subject** | a plain open doorway in a bright empty room filled with gold morning light, nobody in frame, the light slowly intensifying until it fills the whole doorway |

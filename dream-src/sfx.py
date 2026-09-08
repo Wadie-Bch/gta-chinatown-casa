@@ -17,7 +17,7 @@ wav_write("narration_raw.wav", raw)
 
 # ---------------------------------------------------------------- 1. VOICE FINGERPRINT
 # pitch -6% (asetrate 0.94) / net pace +6% (atempo 1.128) / EQ / comp / limit
-CHAIN = ("asetrate=22050*0.94,aresample=22050,atempo=1.128,"
+CHAIN = ("asetrate=22050*0.94,aresample=22050,atempo=1.045,"
          "equalizer=f=110:width_type=q:w=0.9:g=3.6,"
          "equalizer=f=320:width_type=q:w=1.1:g=-3.1,"
          "equalizer=f=2700:width_type=q:w=0.8:g=3.4,"

@@ -10,10 +10,10 @@ OUT   = "lines"
 os.makedirs(OUT, exist_ok=True)
 
 # authored gaps, in RAW (pre-fingerprint) seconds
-G_LINE, G_SHOT, G_ACT, LEAD, TAIL = 0.17, 0.40, 1.90, 1.35, 2.80
+G_LINE, G_SHOT, G_ACT, LEAD, TAIL = 0.26, 0.54, 2.15, 1.45, 3.00
 
 voice = PiperVoice.load(MODEL)
-cfg = SynthesisConfig(length_scale=1.0, noise_scale=0.60, noise_w_scale=0.75,
+cfg = SynthesisConfig(length_scale=1.13, noise_scale=0.60, noise_w_scale=0.75,
                       normalize_audio=True, volume=1.0)
 
 def synth(text, path):
