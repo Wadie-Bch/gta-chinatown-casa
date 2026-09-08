@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Fingerprint the voice, synthesise SFX + per-chapter drone bed, mix, encode."""
 import json, subprocess, numpy as np, wave, os
-from script import SCENES as SHOTS, ACTS
+from script import SHOTS, ACTS
 
 SR = 22050
 raw = np.load("narration_raw.npy")
@@ -127,7 +127,7 @@ for si,(s,m) in enumerate(zip(SHOTS, T["shots"])):
         # hit lands on the camera move
         put(whoosh(0.70, 320, 1300), t-0.42, 0.24)
         put(pop(0.11, 620), t+0.01, 0.30)
-        if s.get("big") or s.get("stat"): put(chime(1.3, 880), t+0.10, 0.30)
+        pass
     if s.get("cap"): put(tick(), t+0.55, 0.9); put(tick(), t+0.62, 0.55)
 
 sfxbuf = sfxbuf[:vo.size]

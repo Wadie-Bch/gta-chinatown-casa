@@ -2,7 +2,7 @@
 """Synthesise every narration line separately -> exact per-line timings."""
 import json, os, wave, numpy as np
 from piper import PiperVoice, SynthesisConfig
-from script import SCENES as SHOTS, ACTS
+from script import SHOTS, ACTS
 
 MODEL = "../models/en_US-norman-medium.onnx"
 SR    = 22050

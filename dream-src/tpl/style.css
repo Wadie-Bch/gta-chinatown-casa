@@ -1,64 +1,55 @@
-@font-face{font-family:'Oswald';font-style:normal;font-weight:200 700;font-display:block;
-  src:url(data:font/woff2;base64,__OSWALD__) format('woff2')}
 @font-face{font-family:'Archivo';font-style:normal;font-weight:100 900;font-display:block;
   src:url(data:font/woff2;base64,__ARCHIVO__) format('woff2')}
-:root{--ink:#EAF2FA;--dim:#8FA3BC;--green:#3FBF7F;
-  --disp:'Oswald','Archivo','Helvetica Neue',Arial,sans-serif;
-  --body:'Archivo','Helvetica Neue',Arial,sans-serif}
+@font-face{font-family:'Oswald';font-style:normal;font-weight:200 700;font-display:block;
+  src:url(data:font/woff2;base64,__OSWALD__) format('woff2')}
+:root{--ink:#EEF4FB;--accent:#36E07A;
+  --body:'Archivo','Helvetica Neue',Arial,sans-serif;
+  --disp:'Oswald','Archivo','Helvetica Neue',Arial,sans-serif}
 *{box-sizing:border-box}
 html,body{height:100%}
-body{margin:0;background:#05080E;color:var(--ink);font-family:var(--body);overflow:hidden;
+body{margin:0;background:#04070C;color:var(--ink);font-family:var(--body);overflow:hidden;
   -webkit-font-smoothing:antialiased}
-#wrap{position:fixed;inset:0;display:grid;place-items:center;background:#05080E}
-#stage{position:relative;overflow:hidden;background:#0E1626;
+#wrap{position:fixed;inset:0;display:grid;place-items:center;background:#04070C}
+#stage{position:relative;overflow:hidden;background:#0A0F1A;
   box-shadow:0 30px 90px -20px rgba(0,0,0,.85)}
-#svg{position:absolute;inset:0;width:100%;height:100%;display:block}
-
-/* big, confident type. shadow is not a substitute for size. */
-.h1{font-family:var(--disp);font-weight:600;letter-spacing:1.5px;text-transform:uppercase}
-.h2{font-family:var(--disp);font-weight:400;letter-spacing:3px;text-transform:uppercase}
-.big{font-family:var(--disp);font-weight:600;letter-spacing:2px;text-transform:uppercase}
-.cp{font-family:var(--body);font-weight:600;letter-spacing:1.2px}
-.lbl{font-family:var(--body);font-weight:600;letter-spacing:1.4px;text-transform:uppercase}
-
+#gl{position:absolute;inset:0;width:100%;height:100%;display:block}
+#vig{position:absolute;inset:0;pointer-events:none;z-index:4;
+  background:radial-gradient(120% 100% at 50% 46%,rgba(0,0,0,0) 54%,rgba(0,0,0,.55) 100%)}
 /* the only text in the film */
 #sub{position:absolute;left:6%;right:6%;bottom:8.5%;z-index:7;text-align:center;
-  font-family:var(--body);font-weight:600;letter-spacing:.4px;line-height:1.34;
-  font-size:clamp(13px,2.05vw,38px);color:#F4F8FD;pointer-events:none;
-  text-shadow:0 2px 10px rgba(0,0,0,.95),0 0 3px rgba(0,0,0,.9);
-  opacity:0;transition:opacity .13s linear;text-wrap:balance}
+  font-family:var(--body);font-weight:600;letter-spacing:.3px;line-height:1.34;
+  font-size:clamp(13px,2.05vw,38px);color:#F6F9FD;pointer-events:none;
+  text-shadow:0 2px 12px rgba(0,0,0,.95),0 0 4px rgba(0,0,0,.9);
+  opacity:0;transition:opacity .16s linear;text-wrap:balance}
 #sub.on{opacity:1}
 #bar{position:absolute;left:0;right:0;bottom:0;height:11%;z-index:8;cursor:pointer;
   touch-action:none;opacity:0;transition:opacity .3s;display:flex;align-items:flex-end}
 #stage:hover #bar,#bar.drag{opacity:1}
-#bar .track{position:relative;width:100%;height:4px;margin:0 0 3%;background:rgba(234,242,250,.18);
+#bar .track{position:relative;width:100%;height:4px;margin:0 0 3%;background:rgba(238,244,251,.18);
   transition:height .18s}
-#bar:hover .track,#bar.drag .track{height:8px}
-#bar .fill{position:absolute;left:0;top:0;bottom:0;background:var(--green);width:0}
-#bar .head{position:absolute;top:50%;width:2px;height:15px;margin-top:-7px;background:#fff;opacity:0}
-#bar:hover .head{opacity:1}
-#bar .tick{position:absolute;top:-5px;width:2px;height:13px;background:rgba(234,242,250,.55)}
-
+#bar:hover .track{height:8px}
+#bar .fill{position:absolute;left:0;top:0;bottom:0;background:var(--accent);width:0}
+#bar .tick{position:absolute;top:-5px;width:2px;height:13px;background:rgba(238,244,251,.5)}
 #gate{position:absolute;inset:0;z-index:20;display:grid;place-items:center;cursor:pointer;
-  background:radial-gradient(80% 70% at 50% 46%,rgba(14,22,38,.86),rgba(5,8,14,.97));transition:opacity .5s}
+  background:radial-gradient(80% 70% at 50% 46%,rgba(10,15,26,.86),rgba(4,7,12,.97));transition:opacity .55s}
 #gate.off{opacity:0;pointer-events:none}
 .gin{text-align:center}
 .gk{font-family:var(--disp);font-weight:500;letter-spacing:.34em;font-size:clamp(9px,1.05vw,19px);
-  color:var(--green);text-transform:uppercase}
+  color:var(--accent);text-transform:uppercase}
 .gt{font-family:var(--disp);font-weight:600;text-transform:uppercase;letter-spacing:2px;
-  font-size:clamp(30px,6vw,116px);line-height:1;margin:.28em 0 .16em;color:#F3F8FF}
-.gs{font-family:var(--body);font-weight:500;letter-spacing:1.4px;opacity:.6;
-  font-size:clamp(10px,1.2vw,22px);text-transform:uppercase}
-.gb{margin-top:1.9em;display:inline-flex;align-items:center;gap:.8em;border:2px solid rgba(63,191,127,.55);
+  font-size:clamp(28px,5.4vw,104px);line-height:1;margin:.28em 0 .18em;color:#F3F8FF}
+.gs{font-family:var(--body);font-weight:500;letter-spacing:1.3px;opacity:.6;
+  font-size:clamp(10px,1.18vw,22px);text-transform:uppercase}
+.gb{margin-top:1.9em;display:inline-flex;align-items:center;gap:.8em;border:2px solid rgba(54,224,122,.55);
   border-radius:999px;padding:.6em 1.6em;font-family:var(--disp);font-weight:500;letter-spacing:.3em;
-  text-transform:uppercase;font-size:clamp(10px,1.15vw,21px);color:var(--green);transition:.25s}
-#gate:hover .gb{background:rgba(63,191,127,.14)}
-.gb svg{width:1em;height:1em;fill:var(--green)}
+  text-transform:uppercase;font-size:clamp(10px,1.15vw,21px);color:var(--accent);transition:.25s}
+#gate:hover .gb{background:rgba(54,224,122,.14)}
+.gb svg{width:1em;height:1em;fill:var(--accent)}
 .gmeta{margin-top:2em;font-family:var(--body);font-size:clamp(8px,.86vw,15px);letter-spacing:1.1px;
   opacity:.34;text-transform:uppercase}
 #rot{position:fixed;inset:0;z-index:60;display:none;place-items:center;text-align:center;
-  background:#05080E;padding:8vw}
+  background:#04070C;padding:8vw}
 #rot.on{display:grid}
 #rot .r1{font-family:var(--disp);font-weight:600;text-transform:uppercase;letter-spacing:3px;
-  font-size:6.4vw;color:var(--green);margin-bottom:.5em}
+  font-size:6.4vw;color:var(--accent);margin-bottom:.5em}
 #rot .r2{font-family:var(--body);font-size:3.9vw;opacity:.66;line-height:1.55}

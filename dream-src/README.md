@@ -1,20 +1,24 @@
-# DREAM — "A Bin With No Away"
+# DREAM — "A City With No Flashing Light"
 
-Flat-vector motion graphics, fixed 1920x1080 frame, cut like a dream.
-`dream-a-bin-with-no-away.html` is the finished self-contained artifact.
+A real-time 3D city in three.js. One continuous camera flight, 45 keyframes,
+no cuts, no flashes, no strobe. Subtitles are the only text.
 
     python3 tts.py     # per-line Piper synthesis -> exact timings
     python3 sfx.py     # voice fingerprint, SFX, drone bed -> narration.mp3
-    python3 mkhtml.py  # assemble the single-file episode
+    python3 mkhtml.py  # assemble the single-file episode (three.js inlined)
+    python3 render_mp4.py   # offline master: frames piped into ffmpeg
 
-- `tpl/kg.js`     drawing + animation core. Limbs are capsules rotated about
-                  real joints. Entrances animate a WRAPPER group (a CSS
-                  transform silently overrides the SVG transform attribute)
-                  and run on SECONDS, not normalised scene progress.
-- `tpl/scenes.js` 48 wordless scene compositions.
-- `tpl/engine.js` the edit: 311 hard cuts, content-aware punch-ins, grain,
-                  chromatic split, scanlines, exposure flicker, ghost trails,
-                  and the subtitle track. No titles anywhere in the picture.
-- `grain.b64`     a 320px film-grain tile, generated in numpy, embedded.
+- `tpl/world.js`  the city: instanced buildings, a painted road-grid texture,
+                  signal heads with additive halos, cars that stop at red,
+                  people at kerbs. `?render=1` drops antialiasing and enables
+                  preserveDrawingBuffer for the offline master.
+- `tpl/cam.js`    45 keyframes, Catmull-Rom with linear parameterisation, so
+                  velocity is continuous across every keyframe. Low keyframes
+                  sit in road corridors; a runtime guard lifts the camera if it
+                  would ever enter a block below roof height.
+- `tpl/engine.js` audio clock, act-state lerp (sky/fog/warmth/density),
+                  subtitles, and `__frame(t,dt,q)` which renders AND composites
+                  in one task — WebGL discards its drawing buffer after
+                  compositing, so a separate grab call returns black.
 
 Voice: Piper `en_US-norman-medium` — LibriVox, public domain, trained from scratch.
