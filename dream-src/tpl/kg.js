@@ -35,18 +35,18 @@ function wrap(el){
 function pop(el,t0,d){
   d=d||.5; const w=wrap(el);
   w.style.transformBox='fill-box'; w.style.transformOrigin='center';
-  an(p=>{const u=back((p-t0)/d);
-    w.style.opacity=cl((p-t0)/(d*.4),0,1); w.style.transform='scale('+u.toFixed(4)+')';});
+  an((p,t,e)=>{const u=back((e-t0)/d);
+    w.style.opacity=cl((e-t0)/(d*.4),0,1); w.style.transform='scale('+u.toFixed(4)+')';});
   return el;
 }
 function fadeIn(el,t0,d){ d=d||.5;
-  an(p=>el.style.opacity=cl((p-t0)/d,0,1)); return el; }
+  an((p,t,e)=>el.style.opacity=cl((e-t0)/d,0,1)); return el; }
 function riseIn(el,t0,d,dist){ d=d||.6; dist=dist==null?54:dist; const w=wrap(el);
-  an(p=>{const u=ease((p-t0)/d); w.style.opacity=u;
+  an((p,t,e)=>{const u=ease((e-t0)/d); w.style.opacity=u;
     w.setAttribute('transform','translate(0 '+((1-u)*dist).toFixed(1)+')');}); return el; }
 function drawOn(el,t0,d){ d=d||.8; el.setAttribute('pathLength','100');
   el.setAttribute('stroke-dasharray','100');
-  an(p=>el.setAttribute('stroke-dashoffset',(100*(1-ease((p-t0)/d))).toFixed(2))); return el; }
+  an((p,t,e)=>el.setAttribute('stroke-dashoffset',(100*(1-ease((e-t0)/d))).toFixed(2))); return el; }
 function spin(el,cx,cy,sp){ const w=wrap(el);
   an((p,t)=>w.setAttribute('transform',`rotate(${(t*sp*57.3).toFixed(2)} ${cx} ${cy})`)); return el; }
 function bob(el,amp,sp,ph){ ph=ph||rnd()*TAU; const w=wrap(el);
@@ -200,7 +200,7 @@ function bars(g,x,y,w,h,vals,cols,t0){
   E(g,'line',{x1:x,y1:y,x2:x+w,y2:y,stroke:'#31435C','stroke-width':5});
   vals.forEach((v,i)=>{
     const b=R(g,x+i*bw+bw*.16,y,bw*.68,1,10,cols[i%cols.length]);
-    an(p=>{const u=eio(((p-(t0||.1)-i*.06))/.55), hh=Math.max(2,h*v*u);
+    an((p,t,e)=>{const u=eio(((e-(t0||.1)-i*.06))/.55), hh=Math.max(2,h*v*u);
       b.setAttribute('height',hh.toFixed(1)); b.setAttribute('y',(y-hh).toFixed(1));});
   });
 }
@@ -209,7 +209,7 @@ function donut(g,x,y,r,segs,t0){
   segs.forEach((s,i)=>{
     const a1=a0+s.v*TAU, r2=r*.58, A0=a0, A1=a1;
     const p=E(g,'path',{fill:s.c});
-    an(pr=>{const u=eio((pr-(t0||.12)-i*.07)/.6), e=A0+(A1-A0)*u;
+    an((pr,tt,el2)=>{const u=eio((el2-(t0||.12)-i*.07)/.6), e=A0+(A1-A0)*u;
       const lg=(e-A0)>Math.PI?1:0;
       p.setAttribute('d',`M${x+Math.cos(A0)*r} ${y+Math.sin(A0)*r}`+
         `A${r} ${r} 0 ${lg} 1 ${x+Math.cos(e)*r} ${y+Math.sin(e)*r}`+
