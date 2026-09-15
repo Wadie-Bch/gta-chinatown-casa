@@ -69,7 +69,10 @@ Music is fifteen original beds, one per tension level, switched by cue in
 `src/episode/episode.js`. Speech ducks the music bus by ~8 dB with a soft
 release; several beats are scored as silence on purpose.
 
-Measured with `ffmpeg -af ebur128`: **−16.3 LUFS integrated, −1.7 dBTP, LRA 9.6**.
+Measured on the delivered MP4 with `ffmpeg -af ebur128`:
+**−16.7 LUFS integrated, −1.4 dBTP, LRA 8.8**.
+The export applies a −0.9 dB trim before AAC, because the encoder overshoots the
+source's true peak by roughly a decibel; the WAV itself sits at −15.7 LUFS / −1.7 dBTP.
 
 ## How it is built
 

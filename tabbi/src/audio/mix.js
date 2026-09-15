@@ -7,7 +7,7 @@ import { BEDS } from './music.js';
 export { SR };
 
 // calibrated against ffmpeg ebur128: yields ≈ -16 LUFS integrated, true peak ≤ -1 dBTP
-export const FIXED_GAIN = 4.62;
+export const FIXED_GAIN = 5.10;
 const CEILING = 0.655;           // -3.7 dBFS sample peak, which keeps inter-sample peaks under -1 dBTP
 
 const REACT = {

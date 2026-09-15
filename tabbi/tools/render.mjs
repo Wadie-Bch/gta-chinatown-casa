@@ -33,7 +33,8 @@ const ff = spawn(ffmpeg, [
   '-map', '0:v', '-map', '1:a',
   '-c:v', 'libx264', '-preset', 'medium', '-crf', '17', '-pix_fmt', 'yuv420p',
   '-profile:v', 'high', '-level', '4.1', '-g', String(fps * 2),
-  '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-ac', '2',
+  '-af', 'volume=-0.9dB',   // headroom for AAC overshoot: keeps true peak under -1 dBTP
+  '-c:a', 'aac', '-b:a', '256k', '-ar', '48000', '-ac', '2',
   '-shortest', '-movflags', '+faststart', OUT,
 ], { stdio: ['pipe', 'inherit', 'inherit'] });
 
