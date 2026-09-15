@@ -1,0 +1,28 @@
+<!doctype html><meta charset=utf-8><style>html,body{margin:0;background:#F5F5F7}canvas{display:block}</style>
+<canvas id=c width=1920 height=1080></canvas>
+<script type="module">
+import { drawTabbi, pose } from '/src/chars/tabbi.js';
+import { drawGate } from '/src/chars/gate.js';
+import { drawHelper } from '/src/chars/helper.js';
+import { drawDash } from '/src/chars/dash.js';
+import { C, f } from '/src/core/palette.js';
+const x = document.getElementById('c').getContext('2d');
+x.fillStyle=C.white; x.fillRect(0,0,1920,1080);
+const lbl=(s,cx)=>{x.fillStyle=C.ink;x.font=f(700,26);x.textAlign='center';x.fillText(s,cx,1010)};
+drawGate(x,{x:250,y:900,s:1.1,mood:'neutral'}); lbl('gate neutral',250);
+drawGate(x,{x:520,y:900,s:1.1,mood:'deny',armR:70,look:-.5}); lbl('gate deny',520);
+drawGate(x,{x:790,y:900,s:1.1,mood:'scan',scanBeam:1,armR:96}); lbl('gate scan',790);
+drawHelper(x,{x:1050,y:900,s:1.1,face:'happy',t:.4}); lbl('helper happy',1050);
+drawHelper(x,{x:1280,y:900,s:1.1,face:'thinking',t:.4,armR:70}); lbl('helper thinking',1280);
+drawHelper(x,{x:1500,y:900,s:1.1,face:'proud',t:.4,badge:1}); lbl('helper verified',1500);
+drawDash(x,{x:1760,y:900,s:.95,mood:'tired',t:.4,pant:1}); lbl('dash tired',1760);
+drawDash(x,{x:300,y:460,s:.95,mood:'sprinting',ph:.2,t:.4}); 
+drawDash(x,{x:620,y:460,s:.95,mood:'done',t:.4,pant:1});
+drawTabbi(x,{...pose('smug',.3),x:900,y:460,s:1.3});
+drawTabbi(x,{...pose('shocked',.3),x:1120,y:460,s:1.3});
+drawHelper(x,{x:1380,y:460,s:1.1,face:'reading',t:.4,armR:-30,armL:60});
+drawGate(x,{x:1700,y:460,s:1.1,mood:'approve',armR:40,clip:false});
+x.fillStyle=C.ink;x.font=f(700,26);x.textAlign='center';
+[['dash sprint',300],['dash done',620],['tabbi smug',900],['tabbi shocked',1120],['helper reading',1380],['gate approve',1700]].forEach(([s,cx])=>x.fillText(s,cx,520));
+window.__tabbi={ready:true,seek(){}};
+</script>

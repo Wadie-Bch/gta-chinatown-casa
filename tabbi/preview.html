@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>TABBI — He Ordered Pizza. The Browser Said No.</title>
+<meta name="theme-color" content="#0B0B0E">
+<style>
+  :root { color-scheme: dark; }
+  html,body { margin:0; height:100%; background:#0B0B0E; overflow:hidden;
+    font:600 16px/1.3 "Liberation Sans",Arial,Helvetica,system-ui,sans-serif; color:#F5F5F7; }
+  #shell { position:fixed; inset:0; display:grid; place-items:center; cursor:pointer; }
+  #shell.playing { cursor:none; }
+  #shell.chrome { cursor:default; }
+  #stage { width:100%; height:100%; object-fit:contain; display:block; background:#0B0B0E; }
+  .render #stage { object-fit:fill; }
+  /* transport — deliberately almost nothing */
+  #chrome { position:fixed; left:0; right:0; bottom:0; padding:0 0 env(safe-area-inset-bottom,0);
+    opacity:0; transition:opacity .35s ease; pointer-events:none; }
+  #shell.chrome ~ #chrome, #chrome:hover { opacity:1; }
+  #track { height:3px; background:rgba(245,245,247,.16); }
+  #bar { height:100%; background:#188567; transform-origin:0 50%; transform:scaleX(0); }
+  #sound { position:fixed; right:calc(18px + env(safe-area-inset-right,0px)); bottom:calc(18px + env(safe-area-inset-bottom,0px));
+    width:52px; height:52px; border-radius:26px; border:0; background:rgba(32,32,39,.72); color:#F5F5F7;
+    font-size:22px; line-height:52px; text-align:center; cursor:pointer; pointer-events:auto;
+    opacity:0; transition:opacity .35s ease; backdrop-filter:blur(8px); }
+  #shell.chrome ~ #chrome #sound { opacity:1; }
+  .render #chrome, .render #start, .render #endcard { display:none !important; }
+  /* gates */
+  #start, #endcard { position:fixed; inset:0; display:grid; place-items:center; background:rgba(11,11,14,.82); }
+  #start[hidden], #endcard[hidden] { display:none; }
+  .card { text-align:center; padding:0 24px; max-width:min(92vw,720px); }
+  .ttl { font-size:clamp(22px,4.6vw,44px); font-weight:800; letter-spacing:-.5px; margin:0 0 10px; }
+  .sub { font-size:clamp(13px,2.4vw,18px); font-weight:700; color:rgba(245,245,247,.55); margin:0 0 26px; letter-spacing:2px; }
+  button.big { font:800 clamp(15px,2.8vw,20px)/1 "Liberation Sans",Arial,sans-serif; letter-spacing:1px;
+    padding:18px 34px; border-radius:999px; border:0; background:#188567; color:#F5F5F7; cursor:pointer; }
+  button.big:hover { background:#1A9B76; }
+  button.big[disabled] { background:#2A2A32; color:rgba(245,245,247,.5); cursor:progress; }
+  .mark { width:86px; height:86px; margin:0 auto 18px; }
+</style>
+</head>
+<body>
+<div id="shell"><canvas id="stage"></canvas></div>
+<div id="chrome"><div id="track"><div id="bar"></div></div><button id="sound" aria-label="Sound on">🔊</button></div>
+
+<div id="start" hidden><div class="card">
+  <canvas class="mark" id="markA" width="172" height="172"></canvas>
+  <p class="ttl">He Ordered Pizza.<br>The Browser Said No.</p>
+  <p class="sub">TABBI · EPISODE 1 · 5:00</p>
+  <button class="big" id="startBtn" disabled>PREPARING SOUND…</button>
+</div></div>
+
+<div id="endcard" hidden><div class="card">
+  <canvas class="mark" id="markB" width="172" height="172"></canvas>
+  <p class="ttl">TABBI</p>
+  <p class="sub">HE ORDERED PIZZA. THE BROWSER SAID NO.</p>
+  <button class="big" id="replayBtn">↻  WATCH AGAIN</button>
+</div></div>
+
+<script type="module">
+  import { tabbiMark } from './src/chars/tabbi.js';
+  for (const id of ['markA','markB']) {
+    const c = document.getElementById(id).getContext('2d');
+    c.clearRect(0,0,172,172); c.translate(86,150); c.scale(.62,.62); tabbiMark(c,0,0,1);
+  }
+</script>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
