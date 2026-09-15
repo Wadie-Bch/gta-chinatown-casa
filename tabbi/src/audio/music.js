@@ -100,6 +100,25 @@ export const BEDS = {
     steps(t0, t1, 96, 3, (i, t) => bell(B, t, N(arp[i % 6]), .8, g * .045, ((i % 3) - 1) * .35));
     steps(t0, t1, 96, .5, (i, t) => pad(B, t, N([52, 55, 57, 55][i % 4]), 1.4, g * .06));
   },
+  // deliberately cheap hold music, four bars, one note permanently wrong
+  beige(B, t0, t1, g) {
+    const mel = [72, 76, 79, 76, 74, 77, 73, 77];   // the 73 is the wrong one
+    steps(t0, t1, 92, 2, (i, t) => {
+      const n = mel[i % 8];
+      tone(B, { t, d: .46, f0: N(n), type: 'square', duty: .22, g: g * .055, shape: 'blip', so: { a: .05, k: 7 }, pan: -.1 });
+      tone(B, { t, d: .46, f0: N(n - 12), type: 'square', duty: .3, g: g * .03, shape: 'blip', so: { a: .05, k: 7 } });
+    });
+    steps(t0, t1, 92, 1, (i, t) => bass(B, t, N([48, 48, 53, 55][i % 4]), .4, g * .06));
+    steps(t0, t1, 92, 1, (i, t) => { if (i % 2 === 0) hat(B, t, g * .018); });
+  },
+  // RETAIN's theme: warm, smooth, and about ten percent too pleased with itself
+  smarm(B, t0, t1, g) {
+    const ch = [[57, 61, 64, 68], [55, 59, 62, 66], [53, 57, 60, 64], [55, 59, 62, 65]];
+    steps(t0, t1, 88, .25, (i, t) => ch[i % 4].forEach((n, k) => pad(B, t, N(n), 3.0, g * .062, (k - 1.5) * .3)));
+    steps(t0, t1, 88, 1, (i, t) => bass(B, t, N([33, 33, 31, 33][i % 4]), .5, g * .085));
+    steps(t0, t1, 88, 1, (i, t) => { if (i % 4 === 2) snap(B, t, g * .05); });
+    steps(t0, t1, 88, 2, (i, t) => { if (i % 8 === 5) bell(B, t, N(80), 1.2, g * .035, .35); });
+  },
   outro(B, t0, t1, g) {
     steps(t0, t1, 84, .25, (i, t) => [53, 57, 60, 65].forEach((n, k) => pad(B, t, N(n), 3.4, g * .08, (k - 1.5) * .3)));
     steps(t0, t1, 84, 1, (i, t) => { if (i === 0) bass(B, t, N(41), 1.2, g * .1); });

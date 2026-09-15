@@ -13,6 +13,7 @@ const CEILING = 0.655;           // -3.7 dBFS sample peak, which keeps inter-sam
 const REACT = {
   tabbiSmug: ['smug', 'tabbi'], tabbiCheer: ['cheer', 'tabbi'], tabbiShout: ['shout', 'tabbi'],
   tabbiHuff: ['huff', 'tabbi'], tabbiSmall: ['small', 'tabbi'], dashSigh: ['sigh', 'dash'],
+  retainWarm: ['warm', 'retain'], retainSad: ['sigh', 'retain'],
   gasp: ['gasp', 'tabbi'], sigh: ['sigh', 'tabbi'], swallow: ['swallow', 'tabbi'],
 };
 

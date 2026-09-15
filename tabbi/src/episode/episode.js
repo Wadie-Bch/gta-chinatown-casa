@@ -2,6 +2,7 @@
 // from here — the preview, the frame exporter and the soundtrack.
 import { buildTimeline } from '../core/stage.js';
 import { shots, clearShots } from './kit.js';
+import { useEpisode } from '../core/chrome.js';
 import act0 from './act0.js';
 import act1 from './act1.js';
 import act2 from './act2.js';
@@ -10,16 +11,30 @@ import act4 from './act4.js';
 import act5 from './act5.js';
 import act6 from './act6.js';
 import act7 from './act7.js';
+import b0 from './b0.js';
+import b1 from './b1.js';
+import b2 from './b2.js';
+import b3 from './b3.js';
+import b4 from './b4.js';
+import b5 from './b5.js';
+import b6 from './b6.js';
+import b7 from './b7.js';
+
+/** which episode this build renders: ?ep=2 in the browser, TABBI_EP=2 in node */
+export const EP = Number(
+  (typeof location !== 'undefined' && new URLSearchParams(location.search).get('ep')) ||
+  (typeof process !== 'undefined' && process.env && process.env.TABBI_EP) || 1);
 
 clearShots();
-[act0, act1, act2, act3, act4, act5, act6, act7].forEach(a => a());
+(EP === 2 ? [b0, b1, b2, b3, b4, b5, b6, b7] : [act0, act1, act2, act3, act4, act5, act6, act7]).forEach(a => a());
+useEpisode(EP);
 
 export const TIMELINE = buildTimeline(shots);
 export const DURATION = TIMELINE.duration;
 export const FPS = 30;
 
 /** music cues, in episode seconds. name → a bed in audio/music.js */
-export const MUSIC = [
+const MUSIC_EP1 = [
   { t: 0.0, name: 'hungerPad', gain: .85 },
   { t: 13.0, name: 'silence', gain: 0 },
   { t: 15.4, name: 'denial', gain: .9 },
@@ -46,6 +61,35 @@ export const MUSIC = [
   { t: 288.0, name: 'silence', gain: 0 },
   { t: 292.5, name: 'outro', gain: 1 },
 ];
+
+const MUSIC_EP2 = [
+  { t: 0.0, name: 'lowEbb', gain: .8 },
+  { t: 9.0, name: 'irony', gain: .85 },
+  { t: 20.0, name: 'shopping', gain: .9 },
+  { t: 36.0, name: 'chase', gain: .95 },
+  { t: 52.0, name: 'tension', gain: .9 },
+  { t: 60.0, name: 'smarm', gain: 1 },
+  { t: 96.0, name: 'smarm', gain: .9 },
+  { t: 118.0, name: 'silence', gain: 0 },
+  { t: 122.0, name: 'smarm', gain: .95 },
+  { t: 136.0, name: 'dread', gain: .85 },
+  { t: 140.0, name: 'beige', gain: 1 },
+  { t: 176.0, name: 'silence', gain: 0 },
+  { t: 180.0, name: 'victory', gain: .9 },
+  { t: 189.0, name: 'tension', gain: .9 },
+  { t: 210.0, name: 'chase', gain: .95 },
+  { t: 220.0, name: 'dread', gain: .95 },
+  { t: 225.0, name: 'lowEbb', gain: .8 },
+  { t: 234.0, name: 'chase', gain: 1 },
+  { t: 243.0, name: 'smarm', gain: .85 },
+  { t: 252.0, name: 'victory', gain: 1 },
+  { t: 266.0, name: 'irony', gain: .8 },
+  { t: 275.0, name: 'lowEbb', gain: .7 },
+  { t: 288.0, name: 'silence', gain: 0 },
+  { t: 292.0, name: 'outro', gain: 1 },
+];
+
+export const MUSIC = EP === 2 ? MUSIC_EP2 : MUSIC_EP1;
 
 /** flatten every sound event to absolute episode time */
 export function soundEvents() {

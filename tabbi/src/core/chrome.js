@@ -7,7 +7,7 @@ import { clamp, lerp, p01, E, sin01 } from './util.js';
 export const CHROME_H = 96;
 const TAB_H = 54, BAR_H = CHROME_H - TAB_H;
 
-export const TABS = [
+export const TABS_EP1 = [
   { label: 'hotslice.example', url: 'hotslice.example/order', dot: C.mint },
   { label: 'gate.check', url: 'gate.check/verify', dot: C.red },
   { label: 'helper', url: 'helper.local/assist', dot: C.mintMid },
@@ -15,6 +15,16 @@ export const TABS = [
   { label: 'inbox', url: 'inbox.mail/one-time-code', dot: C.cheese },
   { label: 'slice.track', url: 'slice.track/order/4712', dot: C.mint },
 ];
+export const TABS_EP2 = [
+  { label: 'streem.plus', url: 'streem.plus/account', dot: C.mint },
+  { label: 'settings', url: 'streem.plus/account/settings', dot: '#8A8AA0' },
+  { label: 'help', url: 'help.streem.plus/cancel', dot: C.cheese },
+  { label: 'hold.line', url: 'hold.line/queue', dot: C.red },
+  { label: 'inbox', url: 'inbox.mail/streem', dot: C.cheese },
+  { label: 'yap.chat', url: 'yap.chat', dot: C.ink },
+];
+export let TABS = TABS_EP1;
+export function useEpisode(n) { TABS = n === 2 ? TABS_EP2 : TABS_EP1; }
 
 /** which tab each shot lives in — keyed by shot id, so no shot had to change */
 const TAB_OF = {
@@ -23,13 +33,21 @@ const TAB_OF = {
   'a5-race': 4, 'a5-banner': 4, 'a5-inbox': 4, 'a5-shout': 4, 'a5-scream': 4, 'a5-newcode': 4,
   'a5-helper': 2, 'a5-revoked': 2,
 };
-const ACT_TAB = { a0: 0, a1: 1, a2: 1, a3: 0, a4: 5, a5: 5, a6: 5, a7: 5 };
+Object.assign(TAB_OF, {
+  'b1-settings': 1, 'b1-accordion': 1, 'b1-nesting': 1,
+  'b5-through': 3, 'b5-done': 3, 'b5-but': 3,
+  'b5-email': 4, 'b5-click': 4, 'b5-reset': 4,
+});
+const ACT_TAB = {
+  a0: 0, a1: 1, a2: 1, a3: 0, a4: 5, a5: 5, a6: 5, a7: 5,
+  b0: 0, b1: 0, b2: 2, b3: 2, b4: 3, b5: 0, b6: 0, b7: 0,
+};
 export function tabOf(id) {
   if (id in TAB_OF) return TAB_OF[id];
   return ACT_TAB[id.slice(0, 2)] ?? 0;
 }
 /** shots that own the whole frame */
-export const NO_CHROME = new Set(['a7-mark']);
+export const NO_CHROME = new Set(['a7-mark', 'b7-mark']);
 
 function tabPath(ctx, x, y, w, h) {
   const r = 14, flare = 13;

@@ -6,12 +6,14 @@ import { serve } from './serve.mjs';
 import ffmpeg from 'ffmpeg-static';
 import { existsSync, mkdirSync } from 'node:fs';
 
-const OUT = process.argv[2] || 'out/tabbi-ep1.mp4';
 const arg = n => { const a = process.argv.find(v => v.startsWith('--' + n + '=')); return a ? +a.split('=')[1] : null; };
+const OUT = process.argv[2] || 'out/tabbi-ep1.mp4';
+const EP = arg('ep') ?? 1;
 const FROM = arg('from') ?? +(process.env.FROM || 0);
 const TO = arg('to') ?? (process.env.TO ? +process.env.TO : null);
 mkdirSync('out', { recursive: true });
-if (!existsSync('out/tabbi-audio.wav')) { console.error('run `npm run audio` first'); process.exit(1); }
+const WAV = EP === 2 ? 'out/tabbi-ep2-audio.wav' : 'out/tabbi-audio.wav';
+if (!existsSync(WAV)) { console.error('run `npm run audio` first'); process.exit(1); }
 
 const srv = await serve(8123);
 const b = await chromium.launch({
@@ -20,7 +22,7 @@ const b = await chromium.launch({
 });
 const page = await b.newPage({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 1 });
 page.on('pageerror', e => console.error('PAGEERROR', e.message));
-await page.goto('http://localhost:8123/preview.html?render=1', { waitUntil: 'networkidle' });
+await page.goto(`http://localhost:8123/preview.html?render=1&ep=${EP}`, { waitUntil: 'networkidle' });
 await page.waitForFunction(() => window.__tabbi && window.__tabbi.ready, null, { timeout: 60000 });
 const { duration, fps } = await page.evaluate(() => ({ duration: window.__tabbi.duration, fps: window.__tabbi.fps }));
 const total = Math.round(duration * fps);
@@ -30,7 +32,7 @@ console.log(`rendering ${last - FROM} frames @ ${fps}fps (${duration}s) -> ${OUT
 const ff = spawn(ffmpeg, [
   '-y', '-loglevel', 'error',
   '-f', 'image2pipe', '-framerate', String(fps), '-i', 'pipe:0',
-  '-i', 'out/tabbi-audio.wav',
+  '-i', WAV,
   '-map', '0:v', '-map', '1:a',
   '-c:v', 'libx264', '-preset', 'medium', '-crf', '17', '-pix_fmt', 'yuv420p',
   '-profile:v', 'high', '-level', '4.1', '-g', String(fps * 2),

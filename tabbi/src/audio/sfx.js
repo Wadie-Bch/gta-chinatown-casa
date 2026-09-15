@@ -98,7 +98,30 @@ export function sfx(B, name, t, o = {}) {
     case 'hoverIn': T(B, { t, d: d || 2, f0: 210, f1: 180, type: 'sine', g: .05 * g, shape: 'pad', so: { a: .2, r: .3 } }); N(B, { t, d: d || 2, g: .02 * g, lp: 1200, shape: 'pad', so: { a: .2, r: .3 }, seed: 87 }); break;
     case 'blipSoft': T(B, { t, d: .08, f0: 1200, type: 'sine', g: .05 * g, shape: 'perc', so: { k: 22 } }); break;
     case 'shutterSoft': click(B, t, .08 * g, 0, 5000, .02); break;
-    case 'tabbiSmug': case 'tabbiCheer': case 'tabbiShout': case 'tabbiHuff': case 'tabbiSmall': case 'dashSigh': break; // handled as reactions
+
+    // --- cartoon department -------------------------------------------------
+    case 'boing': T(B, { t, d: .5, f0: 520, f1: 150, type: 'sine', g: .17 * g, shape: 'perc', so: { k: 5 }, vib: .28, vibHz: 17, pan }); T(B, { t, d: .3, f0: 1040, f1: 300, type: 'sine', g: .05 * g, shape: 'perc', so: { k: 9 }, vib: .28, vibHz: 17 }); break;
+    case 'slideWhistleUp': T(B, { t, d: d || .55, f0: 420, f1: 1750, type: 'sine', g: .12 * g, shape: 'swell', glide: 'exp', vib: .012, vibHz: 9, pan }); N(B, { t, d: d || .55, g: .022 * g, lp: 4200, hp: 1200, shape: 'swell', seed: 311 }); break;
+    case 'slideWhistleDown': T(B, { t, d: d || .7, f0: 1650, f1: 300, type: 'sine', g: .12 * g, shape: 'swell', glide: 'exp', vib: .012, vibHz: 8, pan }); N(B, { t, d: d || .7, g: .022 * g, lp: 3600, hp: 900, shape: 'swell', seed: 312 }); break;
+    case 'sadTrombone': [233.1, 220, 196, 174.6].forEach((fr, i) => { T(B, { t: t + i * .3, d: .42, f0: fr * 1.06, f1: fr, type: 'saw', g: .12 * g, shape: 'blip', so: { a: .12, k: 5 }, vib: .02, vibHz: 6, pan }); T(B, { t: t + i * .3, d: .42, f0: fr * .5, type: 'sine', g: .07 * g, shape: 'blip', so: { a: .12, k: 5 } }); }); break;
+    case 'cashRegister': click(B, t, .12 * g, pan, 5200, .02); bell(B, t + .02, 1568, .5, .13 * g, .15); bell(B, t + .09, 2093, .55, .1 * g, -.15); N(B, { t: t + .3, d: .3, g: .07 * g, lp: 2600, hp: 300, shape: 'swell', seed: 313 }); T(B, { t: t + .52, d: .12, f0: 150, f1: 80, type: 'tri', g: .13 * g, shape: 'perc', so: { k: 15 } }); break;
+    case 'recordScratch': { const dd = d || .45; N(B, { t, d: dd, g: .12 * g, lp: 2400, lp1: 7000, hp: 400, shape: 'perc', so: { k: 5 }, seed: 314 }); T(B, { t, d: dd, f0: 900, f1: 120, type: 'saw', g: .08 * g, shape: 'perc', so: { k: 4 }, vib: .2, vibHz: 22 }); break; }
+    case 'cartoonRun': { const n = Math.ceil((d || .9) / .055); for (let i = 0; i < n; i++) { click(B, t + i * .055, .05 * g, ((i % 2) ? .3 : -.3), 3600 + i * 60, .012); T(B, { t: t + i * .055, d: .04, f0: 300 + i * 26, type: 'square', g: .035 * g, shape: 'perc', so: { k: 40 } }); } break; }
+    case 'partyHorn': T(B, { t, d: .36, f0: 300, f1: 760, type: 'saw', g: .12 * g, shape: 'rise', so: { a: .5, r: .3 }, pan }); T(B, { t: t + .34, d: .5, f0: 760, f1: 240, type: 'saw', g: .1 * g, shape: 'perc', so: { k: 5 } }); N(B, { t, d: .8, g: .03 * g, lp: 5000, hp: 900, shape: 'swell', seed: 315 }); break;
+    case 'squeakyToy': T(B, { t, d: .17, f0: 900, f1: 2100, type: 'sine', g: .1 * g, shape: 'blip', so: { a: .3, k: 10 }, pan }); T(B, { t: t + .18, d: .2, f0: 2100, f1: 800, type: 'sine', g: .09 * g, shape: 'blip', so: { a: .2, k: 9 } }); break;
+    case 'popCork': click(B, t, .16 * g, pan, 2600, .014); T(B, { t, d: .18, f0: 420, f1: 180, type: 'sine', g: .16 * g, shape: 'perc', so: { k: 14 } }); N(B, { t: t + .04, d: .2, g: .04 * g, lp: 6000, hp: 1800, shape: 'perc', so: { k: 12 }, seed: 316 }); break;
+    case 'rubberStretch': T(B, { t, d: d || .8, f0: 160, f1: 430, type: 'saw', g: .07 * g, shape: 'swell', vib: .06, vibHz: 11, pan }); N(B, { t, d: d || .8, g: .03 * g, lp: 1800, shape: 'swell', seed: 317 }); break;
+    case 'bigGulp': [190, 150, 118, 92].forEach((fr, i) => T(B, { t: t + i * .12, d: .12, f0: fr, f1: fr * .7, type: 'sine', g: .13 * g, shape: 'perc', so: { k: 14 } })); break;
+    case 'wetSplat': N(B, { t, d: .16, g: .16 * g, lp: 2400, shape: 'perc', so: { k: 16 }, seed: 318 }); T(B, { t, d: .2, f0: 190, f1: 60, type: 'sine', g: .16 * g, shape: 'perc', so: { k: 11 } }); break;
+    case 'tinyApplause': for (let i = 0; i < 9; i++) N(B, { t: t + i * .085 + (i % 3) * .015, d: .1, g: .045 * g, lp: 6500, hp: 1300, shape: 'perc', so: { k: 22 }, pan: ((i % 3) - 1) * .4, seed: 700 + i * 17 }); break;
+    case 'elevatorDing': bell(B, t, 1318, .9, .12 * g, .1); bell(B, t + .26, 1046, 1.1, .1 * g, -.1); break;
+    case 'snore': { const n = Math.ceil((d || 3) / 1.5); for (let i = 0; i < n; i++) { const st = t + i * 1.5; N(B, { t: st, d: .6, g: .055 * g, lp: 700, lp1: 340, shape: 'swell', seed: 400 + i * 13 }); T(B, { t: st, d: .6, f0: 92, f1: 74, type: 'saw', g: .06 * g, shape: 'swell', vib: .16, vibHz: 12 }); T(B, { t: st + .78, d: .38, f0: 210, f1: 150, type: 'sine', g: .035 * g, shape: 'swell' }); } break; }
+    case 'clockTick': click(B, t, .055 * g, pan, 5200, .009); break;
+    case 'plantGrow': T(B, { t, d: d || 1.1, f0: 200, f1: 900, type: 'sine', g: .05 * g, shape: 'rise', so: { a: .75, r: .2 }, glide: 'exp' }); for (let i = 0; i < 7; i++) click(B, t + i * .13, .03 * g, ((i % 2) ? .25 : -.25), 3400, .01); break;
+    case 'stampBig': T(B, { t, d: .34, f0: 110, f1: 44, type: 'square', duty: .4, g: .3 * g, shape: 'perc', so: { k: 8 } }); N(B, { t, d: .2, g: .17 * g, lp: 2400, shape: 'perc', so: { k: 14 }, seed: 319 }); break;
+    case 'toggleFlip': click(B, t, .07 * g, pan, 4600, .012); T(B, { t, d: .06, f0: 620, f1: 900, type: 'square', g: .05 * g, shape: 'perc', so: { k: 28 } }); break;
+    case 'paperSlide': N(B, { t, d: d || .3, g: .05 * g, lp: 3800, hp: 600, shape: 'swell', seed: 320 }); break;
+    case 'tabbiSmug': case 'tabbiCheer': case 'tabbiShout': case 'tabbiHuff': case 'tabbiSmall': case 'dashSigh': case 'retainWarm': case 'retainSad': break; // handled as reactions
     default: break;
   }
 }

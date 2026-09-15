@@ -8,6 +8,7 @@ const VOICE = {
   gate: { type: 'square', duty: .5, base: 104, range: 6, syl: .225, g: .20, vib: 0, vibHz: 0, air: .02, glideUp: 0, k: 7, sub: 1 },
   helper: { type: 'sine', duty: .5, base: 620, range: 200, syl: .155, g: .15, vib: .006, vibHz: 5, air: .006, glideUp: 1.4, k: 10, bell: 1 },
   dash: { type: 'saw', duty: .5, base: 205, range: 55, syl: .2, g: .15, vib: .008, vibHz: 4.5, air: .045, glideUp: -1, k: 9 },
+  retain: { type: 'soft', duty: .5, base: 300, range: 90, syl: .19, g: .16, vib: .009, vibHz: 4.2, air: .016, glideUp: 1.7, k: 7, bell: 1 },
   sysv: { type: 'pulse', duty: .3, base: 148, range: 10, syl: .17, g: .17, vib: 0, vibHz: 0, air: .01, glideUp: 0, k: 9, bit: 1 },
 };
 export const VOICE_NAMES = Object.keys(VOICE);
@@ -83,6 +84,9 @@ export function react(B, t, kind, who = 'tabbi', g = 1) {
     case 'swallow':
       tone(B, { t, d: .1, f0: 150, f1: 90, type: 'sine', g: .12 * g, shape: 'perc', so: { k: 14 } });
       noise(B, { t, d: .09, g: .04 * g, lp: 900, shape: 'perc', so: { k: 18 }, seed: 5 });
+      break;
+    case 'warm':
+      for (let i = 0; i < 3; i++) tone(B, { t: t + i * .17, d: .24, f0: V.base * (1 + i * .16), f1: V.base * (1.12 + i * .18), type: V.type, g: .12 * g, shape: 'blip', so: { a: .3, k: 6 }, vib: .01, vibHz: 4 });
       break;
     case 'pant':
       for (let i = 0; i < 5; i++) noise(B, { t: t + i * .32, d: .2, g: .055 * g, lp: 1500, lp1: 900, shape: 'swell', seed: 200 + i * 9 });

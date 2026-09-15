@@ -52,6 +52,7 @@ export const VOICE_STYLE = {
   helper: { bg: '#E9F3EF', border: C.mintDeep, color: C.mintDeep },
   dash: { bg: C.gray, border: C.ink, color: C.ink },
   gate: { bg: '#2C2C38', color: C.white, border: C.mintMid },
+  retain: { bg: '#FBF3E6', border: '#B98A3A', color: '#5A4115' },
   sysv: { dark: true },
 };
 
