@@ -49,7 +49,7 @@ function eta(ctx, x, y, mins, o = {}) {
 
 export default function act4() {
   // ---- 1. The receipt's dot becomes the delivery dot. 3.4s
-  shot('a4-map', 3.4, (ctx, lt) => {
+  shot('a4-map', 3.4, (ctx, lt, gt) => {
     withCam(ctx, [{ t: 0, x: 200, y: -200, z: .40 }, { t: 3.4, x: 240, y: -220, z: .425, e: E.linear }], lt, () => {
       mapWorld(ctx, { t: lt, route: ROUTE, dest: DEST, destLabel: 'TAB 3', dash: true });
       dot(ctx, ...onRoute(.72), lt);
@@ -59,7 +59,7 @@ export default function act4() {
   }, { tr: { type: 'matchScale', d: .5, x: W * .5, y: H * .5, outZ: .35 }, sfx: [{ t: .05, n: 'mapWhoosh' }, { t: .6, n: 'blipSoft' }, { t: 1.8, n: 'blipSoft' }, { t: 3.0, n: 'blipSoft' }] });
 
   // ---- 2. Push into the dot until the map is a street. 3.0s
-  shot('a4-push', 3.0, (ctx, lt) => {
+  shot('a4-push', 3.0, (ctx, lt, gt) => {
     const p = onRoute(.72);
     withCam(ctx, [{ t: 0, x: 240, y: -220, z: .42 }, { t: 2.8, x: p[0], y: p[1] - 120, z: 2.4, e: E.io3 }, { t: 3.0, x: p[0], y: p[1] - 124, z: 2.55, e: E.linear }], lt, () => {
       mapWorld(ctx, { t: lt, route: ROUTE, dest: DEST, destLabel: 'TAB 3' });
@@ -74,7 +74,7 @@ export default function act4() {
   }, { tr: { type: 'cut' }, sfx: [{ t: .1, n: 'riser', d: 2.4 }, { t: 2.5, n: 'skateRoll', d: .5 }] });
 
   // ---- 3. DASH. Introduced doing his job. 3.2s
-  shot('a4-dash', 3.2, (ctx, lt) => {
+  shot('a4-dash', 3.2, (ctx, lt, gt) => {
     const p = onRoute(.72 + p01(lt, 0, 3.2) * .07);
     withCam(ctx, [{ t: 0, x: p[0] + 60, y: p[1] - 130, z: 1.55 }, { t: 3.2, x: p[0] + 80, y: p[1] - 134, z: 1.6, e: E.linear }], lt, () => {
       mapWorld(ctx, { t: lt, route: ROUTE, dest: DEST, destLabel: 'TAB 3' });
@@ -85,7 +85,7 @@ export default function act4() {
   }, { tr: { type: 'cut' }, sfx: [{ t: .1, n: 'skateRoll', d: 3.0 }, { t: .4, n: 'panting', d: 2.6 }] });
 
   // ---- 4. Tabbi at his door, holding a plate, believing. 3.0s
-  shot('a4-watch', 3.0, (ctx, lt) => {
+  shot('a4-watch', 3.0, (ctx, lt, gt) => {
     withCam(ctx, [{ t: 0, x: -300, y: -480, z: .90 }, { t: 3.0, x: -290, y: -486, z: .93, e: E.linear }], lt, () => {
       doorRoom(ctx, { t: lt, doorX: DOORX, note: true });
       trackScreen(ctx, -1080, -700, 700, 440, {
@@ -101,7 +101,7 @@ export default function act4() {
   }, { tr: { type: 'cut' }, sfx: [{ t: .1, n: 'roomHum', d: 2.9 }, { t: .5, n: 'blipSoft' }, { t: 1.9, n: 'blipSoft' }] });
 
   // ---- 5. The dot changes its mind. 3.4s
-  shot('a4-veer', 3.4, (ctx, lt) => {
+  shot('a4-veer', 3.4, (ctx, lt, gt) => {
     const k = p01(lt, .5, 2.9);
     const off = [lerp(onRoute(.79)[0], -1400, E.io3(k)), lerp(onRoute(.79)[1], 700, E.io3(k))];
     const mins = lt < .7 ? 2 : lt < 1.7 ? 14 : 41;
@@ -118,7 +118,7 @@ export default function act4() {
   }, { tr: { type: 'cut' }, sfx: [{ t: .5, n: 'wrongWay' }, { t: .72, n: 'errorSoft' }, { t: 1.72, n: 'errorSoft' }] });
 
   // ---- 6. 2.0s of face.
-  shot('a4-shock', 2.0, (ctx, lt) => {
+  shot('a4-shock', 2.0, (ctx, lt, gt) => {
     withCam(ctx, [{ t: 0, x: TX + 10, y: -400, z: 1.9 }], lt, () => {
       doorRoom(ctx, { t: lt, doorX: DOORX });
       drawTabbi(ctx, { ...pose('shocked', 0), x: TX, y: 0, s: 1.5, flip: 1, sx: lerp(1, 1.06, p01(lt, 0, .2)) });
@@ -127,7 +127,7 @@ export default function act4() {
   }, { tr: { type: 'cut' }, sfx: [{ t: 0, n: 'gasp' }] });
 
   // ---- 7. They argue in writing. 4.2s
-  shot('a4-chat', 4.2, (ctx, lt) => {
+  shot('a4-chat', 4.2, (ctx, lt, gt) => {
     withCam(ctx, [{ t: 0, x: -80, y: -520, z: 1.05 }, { t: 4.2, x: -74, y: -524, z: 1.07, e: E.linear }], lt, () => {
       doorRoom(ctx, { t: lt, doorX: DOORX + 1400 });
       chatPanel(ctx, -280, -520, 1180, 700, [
@@ -144,7 +144,7 @@ export default function act4() {
   });
 
   // ---- 8. He sends the evidence. 3.0s
-  shot('a4-photo', 3.0, (ctx, lt) => {
+  shot('a4-photo', 3.0, (ctx, lt, gt) => {
     withCam(ctx, [{ t: 0, x: -280, y: -520, z: 1.18 }, { t: 3.0, x: -274, y: -524, z: 1.21, e: E.linear }], lt, () => {
       doorRoom(ctx, { t: lt, doorX: DOORX + 1400 });
       chatPanel(ctx, -280, -520, 1180, 700, [
@@ -166,26 +166,26 @@ export default function act4() {
   }, { tr: { type: 'cut' }, sfx: [{ t: .5, n: 'recvMsg' }, { t: .55, n: 'shutterSoft' }] });
 
   // ---- 9. The reveal. The cursor is dragging him. 4.0s
-  shot('a4-reveal', 4.0, (ctx, lt) => {
+  shot('a4-reveal', 4.0, (ctx, lt, gt) => {
     const cw = [lerp(-260, 780, E.ioSine(p01(lt, .6, 3.4))), lerp(-420, -900, sin01(p01(lt, .6, 3.4) * 1.4))];
     withCam(ctx, [{ t: 0, x: 60, y: -300, z: .50 }, { t: 1.1, x: 140, y: -360, z: .62, e: E.io3 }, { t: 4.0, x: 160, y: -370, z: .63, e: E.linear }], lt, () => {
       mapWorld(ctx, { t: lt, route: ROUTE, dest: DEST, destLabel: 'TAB 3' });
       S(ctx, () => { ctx.globalAlpha = .5; ctx.setLineDash([26, 22]); line(ctx, cw[0], cw[1], cw[0], cw[1] + 240, C.red, 8); ctx.setLineDash([]); });
       drawDash(ctx, { x: cw[0] - 30, y: cw[1] + 250, s: .75, flip: 1, mood: 'sprinting', ph: lt * 5, t: lt });
-      cursor(ctx, cw[0], cw[1], 4.2, .1, { grab: lt * 4 });
+      cursor(ctx, cw[0], cw[1], 4.2, .1, { grab: lt * 4, t: gt, mood: 'happy' });
       S(ctx, () => { ctx.globalAlpha = .9; text(ctx, 'FOLLOWING INSTRUCTIONS', cw[0] + 40, cw[1] - 130, { size: 36, weight: 800, color: C.redDeep, back: C.cream, backStroke: C.red, backLW: 4, backPadX: 20, backPadY: 12, letter: 2 }); });
     });
     finish(ctx, { vig: .24 });
   }, { tr: { type: 'cut' }, sfx: [{ t: .6, n: 'dragSlide', d: 2.8 }, { t: .62, n: 'panting', d: 3.2 }] });
 
   // ---- 10. He types. It gets worse. 3.4s
-  shot('a4-whip', 3.4, (ctx, lt) => {
+  shot('a4-whip', 3.4, (ctx, lt, gt) => {
     const sw = Math.sin(lt * 7.5) * 900;
     withCam(ctx, [{ t: 0, x: 200, y: -300, z: .45 }, { t: 3.4, x: 200, y: -300, z: .47, e: E.linear }], lt, () => {
       mapWorld(ctx, { t: lt, route: ROUTE, dest: DEST, destLabel: 'TAB 3' });
       speedLines(ctx, sw + (sw > 0 ? -240 : 240), -600, 6, 320, .3, 4, sw > 0 ? -1 : 1);
       drawDash(ctx, { x: sw - 40, y: -300, s: .75, flip: sw > 0 ? 1 : -1, mood: 'sprinting', ph: lt * 9, t: lt, tilt: sw > 0 ? -16 : 16 });
-      cursor(ctx, sw, -560, 4.2, .1, { grab: lt * 9 });
+      cursor(ctx, sw, -560, 4.2, .1, { grab: lt * 9, t: gt, mood: 'strain' });
       // the split: what he is actually doing
       S(ctx, () => {
         ctx.globalAlpha = .96;
@@ -199,7 +199,7 @@ export default function act4() {
   }, { tr: { type: 'cut' }, sfx: Array.from({ length: 14 }, (_, i) => ({ t: .1 + i * .22, n: 'typeKey' })).concat(Array.from({ length: 7 }, (_, i) => ({ t: .25 + i * .44, n: 'whoosh', g: .5 }))) });
 
   // ---- 11. He stops. Everything stops. 4.4s
-  shot('a4-freeze', 4.4, (ctx, lt) => {
+  shot('a4-freeze', 4.4, (ctx, lt, gt) => {
     withCam(ctx, [{ t: 0, x: -140, y: -420, z: .78 }, { t: 1.4, x: -120, y: -430, z: .86, e: E.io3 }, { t: 4.4, x: -116, y: -432, z: .88, e: E.linear }], lt, () => {
       doorRoom(ctx, { t: lt, doorX: DOORX, note: true });
       const arrive = E.out3(p01(lt, 1.2, 2.6));
@@ -212,7 +212,7 @@ export default function act4() {
         brow: { l: 16, r: 16, y: -4, show: 1 }, mouth: { shape: 'flat', open: 0, w: 1.1 },
         sx: 1 + Math.sin(lt * 22) * .004, sy: 1 - Math.sin(lt * 22) * .004,
       });
-      cursor(ctx, TX + 150, -215, 3.4, .16, { grab: lt * 3 });
+      cursor(ctx, TX + 150, -215, 3.4, .16, { grab: lt * 3, t: gt, mood: 'strain' });
     });
     finish(ctx, { vig: .22 });
   }, {
@@ -221,7 +221,7 @@ export default function act4() {
   });
 
   // ---- 12. One millimetre. 3.0s
-  shot('a4-twitch', 3.0, (ctx, lt) => {
+  shot('a4-twitch', 3.0, (ctx, lt, gt) => {
     const drift = lt > .9 && lt < 1.5 ? E.out3(p01(lt, .9, 1.5)) * 26 : lt >= 1.5 ? 26 - E.out4(p01(lt, 1.5, 1.9)) * 26 : 0;
     withCam(ctx, [{ t: 0, x: 120, y: -380, z: 1.1 }, { t: 3.0, x: 124, y: -382, z: 1.13, e: E.linear }], lt, () => {
       doorRoom(ctx, { t: lt, doorX: DOORX, note: true });
@@ -232,7 +232,7 @@ export default function act4() {
         eye: { open: lt > 1.0 ? 1.2 : 1.0, wide: 1.06, look: [.4, 0], shape: 'normal', shine: 1 },
         mouth: { shape: lt > 1.0 ? 'gasp' : 'flat', open: .5, w: .9 },
       });
-      cursor(ctx, TX + 150 + drift, -215, 3.4, .16, { grab: lt * 3 });
+      cursor(ctx, TX + 150 + drift, -215, 3.4, .16, { grab: lt * 3, t: gt, mood: drift > 4 ? 'happy' : 'strain' });
     });
     finish(ctx, { vig: .22 });
   }, { tr: { type: 'cut' }, sfx: [{ t: .92, n: 'creak' }, { t: 1.5, n: 'grab' }] });

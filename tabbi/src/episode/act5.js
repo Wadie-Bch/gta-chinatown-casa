@@ -21,7 +21,7 @@ export default function act5() {
       doorRoom(ctx, { t: lt, doorX: DOORX, note: true });
       drawDash(ctx, { x: DASHX, y: 0, s: .92, flip: -1, mood: 'done', t: lt, pant: 1, talk: talk(sh, lt, 'dash') });
       drawTabbi(ctx, { ...pose('holding', 0), x: TX, y: 0, s: 1.5, flip: 1, armL: { a: 72, b: 40, l1: 30, l2: 26 }, armR: { a: 72, b: 40, l1: 30, l2: 26 } });
-      cursor(ctx, TX + 150, -215, 3.4, .16, { grab: lt * 3 });
+      cursor(ctx, TX + 150, -215, 3.4, .16, { grab: lt * 3, t: gt, mood: 'strain' });
       if (lt > .9) S(ctx, () => {
         const k = E.outBack(p01(lt, .9, 1.35));
         ctx.globalAlpha = clamp(k * 1.4); ctx.translate(140, -760); ctx.scale(k, k);
@@ -62,12 +62,12 @@ export default function act5() {
   });
 
   // ---- 3. It is, of course, in another tab. 3.4s
-  shot('a5-notif', 3.4, (ctx, lt) => {
+  shot('a5-notif', 3.4, (ctx, lt, gt) => {
     const k = E.outBack(p01(lt, .25, .8));
     withCam(ctx, [{ t: 0, x: 60, y: -540, z: .95 }, { t: 3.4, x: 66, y: -546, z: .97, e: E.linear }], lt, () => {
       doorRoom(ctx, { t: lt, doorX: DOORX, note: true });
       drawTabbi(ctx, { ...pose('holding', 0), x: TX, y: 0, s: 1.5, flip: 1, armL: { a: 72, b: 40, l1: 30, l2: 26 }, armR: { a: 72, b: 40, l1: 30, l2: 26 }, eye: { open: 1.1, wide: 1, look: [.5, -.4], shape: 'normal', shine: 1 } });
-      cursor(ctx, TX + 150, -215, 3.4, .16, { grab: lt * 3 });
+      cursor(ctx, TX + 150, -215, 3.4, .16, { grab: lt * 3, t: gt, mood: 'strain' });
       S(ctx, () => {
         ctx.globalAlpha = clamp(k * 1.3);
         ctx.translate(lerp(1400, 300, E.out4(p01(lt, .25, .8))), -960);
@@ -78,7 +78,7 @@ export default function act5() {
   }, { tr: { type: 'cut' }, sfx: [{ t: .25, n: 'notifSlide' }, { t: .3, n: 'notif1' }] });
 
   // ---- 4. Move the cursor, move the courier. 3.4s
-  shot('a5-dilemma', 3.4, (ctx, lt) => {
+  shot('a5-dilemma', 3.4, (ctx, lt, gt) => {
     withCam(ctx, [{ t: 0, x: -200, y: -400, z: 1.2 }, { t: 1.2, x: -420, y: -300, z: 1.75, e: E.io3 }, { t: 2.3, x: 340, y: -560, z: 1.2, e: E.io3 }, { t: 3.4, x: 346, y: -562, z: 1.22, e: E.linear }], lt, () => {
       doorRoom(ctx, { t: lt, doorX: DOORX, note: true });
       drawDash(ctx, { x: DASHX, y: 0, s: .92, flip: -1, mood: 'done', t: lt, pant: 1 });
@@ -88,7 +88,7 @@ export default function act5() {
         eye: { open: 1.05, wide: 1, look: [lt < 1.6 ? -.2 : .8, lt < 1.6 ? .5 : -.3], shape: 'normal', shine: 1 },
         brow: { l: 14, r: 14, y: -4, show: 1 }, mouth: { shape: 'wavy', open: 0, w: .9 },
       });
-      cursor(ctx, TX + 150, -215, 3.4, .16, { grab: lt * 3 });
+      cursor(ctx, TX + 150, -215, 3.4, .16, { grab: lt * 3, t: gt, mood: 'strain' });
       S(ctx, () => { ctx.globalAlpha = .85; text(ctx, 'TAB 5 →', 900, -980, { size: 44, weight: 800, color: C.ink, back: C.cream, backStroke: C.ink, backLW: 4, backPadX: 22, backPadY: 14, letter: 3 }); });
     });
     finish(ctx, { vig: .22 });
@@ -104,7 +104,7 @@ export default function act5() {
         ...(lt > 1.35 ? { armR: { a: 128, b: -30, l1: 30, l2: 25 } } : { armL: { a: 100, b: 30, l1: 30, l2: 26 }, armR: { a: 100, b: 30, l1: 30, l2: 26 } }),
         mouth: { shape: lt > 1.35 ? 'smirk' : 'line', open: 0, w: 1, talk: talk(sh, lt, 'tabbi') },
       });
-      cursor(ctx, TX + 150 + wedge * 70, lerp(-215, -30, wedge), 3.4, lerp(.16, 1.5, wedge), { grab: lt * 3 });
+      cursor(ctx, TX + 150 + wedge * 70, lerp(-215, -30, wedge), 3.4, lerp(.16, 1.5, wedge), { grab: lt * 3, t: gt, mood: wedge > .5 ? 'worried' : 'strain' });
       if (wedge > .9) S(ctx, () => { ctx.globalAlpha = .9; rr(ctx, TX + 20, -46, 320, 54, 20, C.gray, 'rgba(32,32,39,.25)', 4); text(ctx, 'WELCOME?', TX + 180, -18, { size: 26, weight: 800, color: 'rgba(32,32,39,.45)', letter: 3 }); });
     });
     say(ctx, sh, lt, 0, W * .70, H * .24, { size: 52, tail: [-.5, 1] });
@@ -116,7 +116,7 @@ export default function act5() {
   });
 
   // ---- 6. The run. 4.6s
-  shot('a5-race', 4.6, (ctx, lt) => {
+  shot('a5-race', 4.6, (ctx, lt, gt) => {
     const x = lerp(HOME, INBOX - 300, E.io2(p01(lt, .05, 4.3)));
     const jump = lt > 1.9 && lt < 2.6 ? Math.sin(p01(lt, 1.9, 2.6) * Math.PI) * 300 : 0;
     withCam(ctx, [{ t: 0, x: HOME + 300, y: -640, z: .78 }, { t: .05, x: HOME + 300, y: -640, z: .78 },
@@ -138,7 +138,7 @@ export default function act5() {
   });
 
   // ---- 7. A notification comes down like a shutter. 3.4s
-  shot('a5-banner', 3.4, (ctx, lt) => {
+  shot('a5-banner', 3.4, (ctx, lt, gt) => {
     const drop = E.out4(p01(lt, .35, .85));
     const slide = p01(lt, 1.2, 2.2);
     const x = lerp(INBOX - 300, INBOX - 20, E.io2(slide));
@@ -167,7 +167,7 @@ export default function act5() {
   }, { tr: { type: 'cut' }, sfx: [{ t: .35, n: 'shutterDrop' }, { t: .86, n: 'thud' }, { t: 1.3, n: 'slideFloor' }, { t: 2.2, n: 'landSoft' }] });
 
   // ---- 8. The code, and its shelf life. 3.6s
-  shot('a5-inbox', 3.6, (ctx, lt) => {
+  shot('a5-inbox', 3.6, (ctx, lt, gt) => {
     withCam(ctx, [{ t: 0, x: INBOX + 40, y: -640, z: .95 }, { t: 1.0, x: INBOX, y: -760, z: 1.35, e: E.io3 }, { t: 3.6, x: INBOX + 4, y: -762, z: 1.38, e: E.linear }], lt, () => {
       tabHall(ctx, { t: lt, active: 4, poolX: INBOX });
       S(ctx, () => {
@@ -230,7 +230,7 @@ export default function act5() {
   });
 
   // ---- 11. Said out loud, it stops being a secret. 4.0s
-  shot('a5-revoked', 4.0, (ctx, lt) => {
+  shot('a5-revoked', 4.0, (ctx, lt, gt) => {
     const dead = lt > .8;
     withCam(ctx, [{ t: 0, x: 300, y: -700, z: 1.12 }, { t: .8, x: 300, y: -700, z: 1.16 }, { t: .95, x: 300, y: -690, z: 1.3, e: E.out4 }, { t: 4.0, x: 304, y: -692, z: 1.33, e: E.linear }], lt, () => {
       robotRoom(ctx, { t: lt });
@@ -250,7 +250,7 @@ export default function act5() {
   }, { tr: { type: 'cut' }, sfx: [{ t: .8, n: 'deny' }, { t: .84, n: 'stampHeavy' }] });
 
   // ---- 12. 2.6s of no sound at all.
-  shot('a5-scream', 2.6, (ctx, lt) => {
+  shot('a5-scream', 2.6, (ctx, lt, gt) => {
     withCam(ctx, [{ t: 0, x: INBOX - 700, y: -400, z: 1.7 }, { t: 2.6, x: INBOX - 700, y: -400, z: 2.0, e: E.io3 }], lt, () => {
       tabHall(ctx, { t: lt, active: 4, poolX: INBOX });
       drawTabbi(ctx, {
@@ -264,7 +264,7 @@ export default function act5() {
   }, { tr: { type: 'cut' }, sfx: [{ t: .05, n: 'silenceHit' }] });
 
   // ---- 13. A new code is issued. To the human. 4.8s
-  shot('a5-newcode', 4.8, (ctx, lt) => {
+  shot('a5-newcode', 4.8, (ctx, lt, gt) => {
     withCam(ctx, [{ t: 0, x: INBOX, y: -700, z: 1.0 }, { t: 2.4, x: INBOX, y: -700, z: 1.04 }, { t: 2.6, x: INBOX, y: -660, z: 1.5, e: E.out4 }, { t: 4.8, x: INBOX + 4, y: -662, z: 1.54, e: E.linear }], lt, () => {
       tabHall(ctx, { t: lt, active: 4, poolX: INBOX });
       S(ctx, () => {

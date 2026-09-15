@@ -33,13 +33,13 @@ function finalCheck(ctx, x, y, k, o = {}) {
 
 export default function act6() {
   // ---- 1. The verified human arrives to collect. 3.4s
-  shot('a6-arrive', 3.4, (ctx, lt) => {
+  shot('a6-arrive', 3.4, (ctx, lt, gt) => {
     const k = E.io3(p01(lt, .1, 2.2));
     withCam(ctx, [{ t: 0, x: 60, y: -460, z: .92 }, { t: 3.4, x: 76, y: -466, z: .95, e: E.linear }], lt, () => {
       doorRoom(ctx, { t: lt, doorX: DOORX, note: true });
       drawDash(ctx, { x: DASHX, y: 0, s: .92, flip: -1, mood: 'done', t: lt, pant: 1 });
       drawTabbi(ctx, { ...pose('defeated', 0), x: TX, y: 0, s: 1.5, flip: 1 });
-      cursor(ctx, TX + 220, -30, 3.4, 1.5);
+      cursor(ctx, TX + 220, -30, 3.4, 1.5, { t: gt, mood: 'worried' });
       drawHelper(ctx, { x: lerp(-1500, HX, k), y: -20, s: 1.28, t: lt, face: 'happy', badge: 1, look: .3 });
       if (k > .5) S(ctx, () => { ctx.globalAlpha = clamp((k - .5) * 3); codeChip(ctx, HX, -700, '8806', { s: .5, glow: .5 }); });
     });
@@ -132,7 +132,7 @@ export default function act6() {
   });
 
   // ---- 6. Dash follows the instructions exactly. 4.4s
-  shot('a6-hand', 4.4, (ctx, lt) => {
+  shot('a6-hand', 4.4, (ctx, lt, gt) => {
     const give = E.io3(p01(lt, .8, 2.6));
     withCam(ctx, [{ t: 0, x: 420, y: -440, z: 1.15 }, { t: 2.6, x: 340, y: -450, z: 1.22, e: E.io2 }, { t: 4.4, x: 336, y: -452, z: 1.24, e: E.linear }], lt, () => {
       doorRoom(ctx, { t: lt, doorX: DOORX, note: true });
@@ -164,7 +164,7 @@ export default function act6() {
   });
 
   // ---- 8. The wide shot that says everything. 6.0s
-  shot('a6-wide', 6.0, (ctx, lt) => {
+  shot('a6-wide', 6.0, (ctx, lt, gt) => {
     withCam(ctx, [{ t: 0, x: -140, y: -460, z: .84 }, { t: 6.0, x: -150, y: -476, z: .87, e: E.linear }], lt, () => {
       doorRoom(ctx, { t: lt, doorX: DOORX, note: true });
       drawHelper(ctx, {
@@ -178,7 +178,7 @@ export default function act6() {
   }, { tr: { type: 'cut' }, sfx: [{ t: .1, n: 'roomHum', d: 5.8 }, { t: 1.9, n: 'blink' }, { t: 4.4, n: 'blink' }] });
 
   // ---- 9. A long look at a small creature. 6.6s
-  shot('a6-hold', 6.6, (ctx, lt) => {
+  shot('a6-hold', 6.6, (ctx, lt, gt) => {
     withCam(ctx, [{ t: 0, x: TX + 20, y: -400, z: 1.4 }, { t: 6.6, x: TX + 24, y: -410, z: 1.78, e: E.ioSine }], lt, () => {
       doorRoom(ctx, { t: lt, doorX: DOORX });
       drawTabbi(ctx, {
@@ -193,7 +193,7 @@ export default function act6() {
   }, { tr: { type: 'cut' }, sfx: [{ t: 1.2, n: 'blink' }, { t: 3.4, n: 'blink' }, { t: 5.6, n: 'blink' }, { t: 4.3, n: 'swallow' }] });
 
   // ---- 10. He sits down. 6.0s
-  shot('a6-slide', 6.0, (ctx, lt) => {
+  shot('a6-slide', 6.0, (ctx, lt, gt) => {
     const sl = E.io3(p01(lt, .4, 2.4));
     withCam(ctx, [{ t: 0, x: TX + 80, y: -400, z: 1.2 }, { t: 2.6, x: TX + 90, y: -280, z: 1.3, e: E.io2 }, { t: 6.0, x: TX + 92, y: -276, z: 1.33, e: E.linear }], lt, () => {
       doorRoom(ctx, { t: lt, doorX: DOORX, note: true });

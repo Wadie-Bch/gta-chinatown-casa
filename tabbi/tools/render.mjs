@@ -7,8 +7,9 @@ import ffmpeg from 'ffmpeg-static';
 import { existsSync, mkdirSync } from 'node:fs';
 
 const OUT = process.argv[2] || 'out/tabbi-ep1.mp4';
-const FROM = +(process.env.FROM || 0);
-const TO = process.env.TO ? +process.env.TO : null;
+const arg = n => { const a = process.argv.find(v => v.startsWith('--' + n + '=')); return a ? +a.split('=')[1] : null; };
+const FROM = arg('from') ?? +(process.env.FROM || 0);
+const TO = arg('to') ?? (process.env.TO ? +process.env.TO : null);
 mkdirSync('out', { recursive: true });
 if (!existsSync('out/tabbi-audio.wav')) { console.error('run `npm run audio` first'); process.exit(1); }
 

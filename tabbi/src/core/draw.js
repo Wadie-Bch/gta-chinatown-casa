@@ -123,7 +123,11 @@ export function textBlock(ctx, str, x, y, o = {}) {
 }
 
 // ---- world furniture --------------------------------------------------
-/** the mouse pointer, a physical object in this world */
+/**
+ * The pointer. In this world it is not a tool, it is a small animal that lives
+ * on the screen: it has eyes, it reacts, and it can be held.
+ * mood: 'idle' | 'worried' | 'happy' | 'strain' | 'blank'
+ */
 export function cursor(ctx, x, y, s = 1, rot = 0, opt = {}) {
   S(ctx, () => {
     ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
@@ -131,6 +135,29 @@ export function cursor(ctx, x, y, s = 1, rot = 0, opt = {}) {
     poly(ctx, [[0, 0], [0, 46], [11.5, 35], [19, 51], [27, 47], [19.5, 31.5], [34, 30]],
       opt.fill || C.white, C.ink, 5);
     noShadow(ctx);
+    const face = opt.face ?? (s >= 1.6);
+    if (face) {
+      const t = opt.t ?? 0, mood = opt.mood || (opt.grab ? 'strain' : 'idle');
+      // a blink you can set your watch by, so it reads as alive without fidgeting
+      const bl = Math.abs(((t * 0.37) % 1) - 0) < .045 ? 0 : 1;
+      const ex = 8.5, ey = 22, er = 3.6;
+      S(ctx, () => {
+        ctx.rotate(-rot * .55);          // the face keeps looking at us
+        if (mood === 'blank') { line(ctx, ex - 4, ey, ex + 4, ey, C.ink, 2.6); line(ctx, ex + 8, ey + 3, ex + 16, ey + 3, C.ink, 2.6); return; }
+        if (bl < .5) {
+          line(ctx, ex - 4, ey, ex + 4, ey, C.ink, 2.6);
+          line(ctx, ex + 8, ey + 3, ex + 16, ey + 3, C.ink, 2.6);
+        } else {
+          ell(ctx, ex, ey, er * (mood === 'strain' ? 1.15 : 1), er * (mood === 'strain' ? 1.3 : 1), 0, C.ink);
+          ell(ctx, ex + 12, ey + 3, er * (mood === 'strain' ? 1.15 : 1), er * (mood === 'strain' ? 1.3 : 1), 0, C.ink);
+          circ(ctx, ex - 1.2, ey - 1.4, 1.2, C.white); circ(ctx, ex + 10.8, ey + 1.6, 1.2, C.white);
+        }
+        if (mood === 'happy') { ctx.beginPath(); ctx.arc(ex + 6, ey + 9, 4.4, .25, 2.9); ctx.strokeStyle = C.ink; ctx.lineWidth = 2.2; ctx.stroke(); }
+        else if (mood === 'worried') { ctx.beginPath(); ctx.moveTo(ex + 2, ey + 12); ctx.quadraticCurveTo(ex + 6, ey + 8, ex + 10, ey + 12); ctx.strokeStyle = C.ink; ctx.lineWidth = 2.2; ctx.stroke(); }
+        else if (mood === 'strain') { ell(ctx, ex + 6, ey + 11, 3.2, 2.2, 0, C.ink); }
+        else line(ctx, ex + 3, ey + 11, ex + 9, ey + 11, C.ink, 2.2);
+      });
+    }
     if (opt.grab) { // little mint ring when the cursor is holding something
       circ(ctx, 2, 2, 16 + Math.sin(opt.grab * 6) * 1.5, null, C.mint, 4);
     }

@@ -1,0 +1,35 @@
+<!doctype html><meta charset=utf-8><style>html,body{margin:0}canvas{display:block}</style>
+<canvas id=c width=1280 height=720></canvas>
+<script type="module">
+import { drawTabbi, pose } from '/src/chars/tabbi.js';
+import { pizza, olive } from '/src/rooms/props.js';
+import { C, f } from '/src/core/palette.js';
+import { S, rr, circ, text, shadow, noShadow, line } from '/src/core/draw.js';
+const x = document.getElementById('c').getContext('2d');
+// ground
+const g = x.createLinearGradient(0,0,0,720); g.addColorStop(0,'#FFFFFF'); g.addColorStop(1,'#E6E6EC');
+x.fillStyle=g; x.fillRect(0,0,1280,720);
+// browser chrome sliver, so the thumbnail says "inside a browser" at a glance
+x.fillStyle='#C9C9D2'; x.fillRect(0,0,1280,54);
+x.fillStyle='#fff'; S(x,()=>{ x.beginPath(); x.moveTo(24,54); x.quadraticCurveTo(30,10,54,10); x.lineTo(300,10); x.quadraticCurveTo(324,10,330,54); x.closePath(); x.fill(); });
+circ(x,62,32,9,C.mint); text(x,'hotslice.example',84,32,{size:20,weight:800,color:C.ink,align:'left'});
+[C.red,C.cheese,C.mint].forEach((c,i)=>circ(x,1180+i*28,28,8,c));
+// pizza, big and warm, top right
+S(x,()=>{ x.translate(1085,182); x.rotate(-.12); pizza(x,0,0,128,{steam:0,seed:3}); });
+// the refusal
+S(x,()=>{
+  x.translate(1085,182);
+  x.strokeStyle=C.red; x.lineWidth=26; x.lineCap='round';
+  x.beginPath(); x.moveTo(-104,-104); x.lineTo(104,104); x.stroke();
+  x.beginPath(); x.moveTo(104,-104); x.lineTo(-104,104); x.stroke();
+});
+// Tabbi, shocked, big
+drawTabbi(x,{...pose('shocked',0), x:268, y:706, s:2.06, flip:1});
+// headline
+text(x,'PROVE',536,372,{size:122,weight:800,color:C.ink,align:'left',letter:-2});
+text(x,'YOU EXIST',536,490,{size:122,weight:800,color:C.red,align:'left',letter:-2});
+S(x,()=>{ rr(x,532,556,470,62,31,C.mint); text(x,'TO ORDER A PIZZA',767,588,{size:32,weight:800,color:C.white,letter:3}); });
+// channel mark
+S(x,()=>{ rr(x,1032,556,196,62,31,C.ink); text(x,'TABBI',1130,588,{size:30,weight:800,color:C.white,letter:6}); });
+window.__tabbi={ready:true,seek(){}};
+</script>

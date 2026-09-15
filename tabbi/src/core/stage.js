@@ -4,6 +4,7 @@
 import { W, H, C } from './palette.js';
 import { clamp, p01, E, lerp, TAU } from './util.js';
 import { S, rrPath } from './draw.js';
+import { drawChrome, tabOf, NO_CHROME, CHROME_H } from './chrome.js';
 
 export function buildTimeline(shots) {
   let t = 0; const out = [];
@@ -142,11 +143,31 @@ function composite(ctx, tl, shot, t) {
   }
 }
 
+/** the page viewport: full width, the shot's 1080 centre-cropped to fit under the chrome */
+const CROP = 20;   // the page keeps its floor: almost all of the crop comes off the top
+
 export function renderEpisode(ctx, tl, t) {
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.fillStyle = C.ink; ctx.fillRect(0, 0, W, H);
   const shot = shotAt(tl, t);
+  const idx = tl.shots.indexOf(shot);
+  const prev = idx > 0 ? tl.shots[idx - 1] : null;
+  const bare = NO_CHROME.has(shot.id);
+
+  ctx.save();
+  if (!bare) { ctx.beginPath(); ctx.rect(0, CHROME_H, W, H - CHROME_H); ctx.clip(); ctx.translate(0, CROP); }
   composite(ctx, tl, shot, t);
+  ctx.restore();
   ctx.setTransform(1, 0, 0, 1, 0, 0);
+
+  if (!bare) {
+    // the active tab slides when the story moves rooms, and the page reloads
+    const to = tabOf(shot.id), from = prev ? tabOf(prev.id) : to;
+    const sw = to === from ? 1 : E.io3(p01(t - shot.t0, 0, .42));
+    drawChrome(ctx, lerp(from, to, sw), {
+      t, k: p01(t, 0, 1.1),
+      load: to === from ? 0 : p01(t - shot.t0, .05, .85),
+    });
+  }
   return shot;
 }

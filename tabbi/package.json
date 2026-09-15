@@ -1,14 +1,15 @@
 {
   "name": "tabbi",
   "version": "1.0.0",
-  "description": "TABBI — code-drawn animated comedy episodes.",
+  "description": "TABBI \u2014 code-drawn animated comedy episodes.",
   "main": "index.js",
   "scripts": {
     "build": "node tools/build.mjs",
     "serve": "node tools/serve.mjs",
     "audio": "node tools/audio.mjs",
     "render": "node tools/render.mjs",
-    "check": "node tools/inspect.mjs"
+    "check": "node tools/inspect.mjs",
+    "thumb": "node tools/thumb.mjs"
   },
   "keywords": [],
   "author": "",
