@@ -58,7 +58,7 @@ export default function b0() {
 
   // ---- 3. One show. Once. 3.6s
   shot('b0-history', 3.6, (ctx, lt) => {
-    withCam(ctx, [{ t: 0, x: -1300, y: -1020, z: 1.05 }, { t: 3.6, x: -1280, y: -1024, z: 1.09, e: E.linear }], lt, () => {
+    withCam(ctx, [{ t: 0, x: -1180, y: -700, z: .95 }, { t: 3.6, x: -1166, y: -704, z: .98, e: E.linear }], lt, () => {
       streemPage(ctx, { t: lt });
       S(ctx, () => {
         ctx.globalAlpha = clamp(p01(lt, .4, .8) * 1.3);

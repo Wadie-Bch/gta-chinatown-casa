@@ -120,6 +120,7 @@ export function sfx(B, name, t, o = {}) {
     case 'plantGrow': T(B, { t, d: d || 1.1, f0: 200, f1: 900, type: 'sine', g: .05 * g, shape: 'rise', so: { a: .75, r: .2 }, glide: 'exp' }); for (let i = 0; i < 7; i++) click(B, t + i * .13, .03 * g, ((i % 2) ? .25 : -.25), 3400, .01); break;
     case 'stampBig': T(B, { t, d: .34, f0: 110, f1: 44, type: 'square', duty: .4, g: .3 * g, shape: 'perc', so: { k: 8 } }); N(B, { t, d: .2, g: .17 * g, lp: 2400, shape: 'perc', so: { k: 14 }, seed: 319 }); break;
     case 'toggleFlip': click(B, t, .07 * g, pan, 4600, .012); T(B, { t, d: .06, f0: 620, f1: 900, type: 'square', g: .05 * g, shape: 'perc', so: { k: 28 } }); break;
+    case 'holdBedIn': T(B, { t, d: 1.2, f0: 523, f1: 523, type: 'square', duty: .22, g: .03 * g, shape: 'pad', so: { a: .3, r: .4 } }); break;
     case 'paperSlide': N(B, { t, d: d || .3, g: .05 * g, lp: 3800, hp: 600, shape: 'swell', seed: 320 }); break;
     case 'tabbiSmug': case 'tabbiCheer': case 'tabbiShout': case 'tabbiHuff': case 'tabbiSmall': case 'dashSigh': case 'retainWarm': case 'retainSad': break; // handled as reactions
     default: break;

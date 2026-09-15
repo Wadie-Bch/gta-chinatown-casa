@@ -6,7 +6,7 @@ import { S, rr, circ, ell, line, poly, shadow, noShadow, groundShadow, text } fr
 import { clamp, lerp, TAU, D2R, sinw, sin01 } from '../core/util.js';
 
 export const RETAIN_H = 230;
-const SHELL = '#E9F1EC', SHELL_D = '#D3E2DA';
+const SHELL = '#BFD9CB', SHELL_D = '#A6C5B5';
 
 /** face: 'warm' | 'delighted' | 'listening' | 'sorry' | 'hopeful' */
 export function drawRetain(ctx, o = {}) {
@@ -71,9 +71,9 @@ export function drawRetain(ctx, o = {}) {
       poly(ctx, [[0, -128], [16, -110], [10, -62], [-10, -62], [-16, -110]], C.cheese, C.ink, 5);
       rr(ctx, -13, -140, 26, 18, 6, C.cheese, C.ink, 5);
 
-      // name badge
+      // name badge — un-mirror it so the text reads when he faces left
       S(ctx, () => {
-        ctx.translate(-92, -96);
+        ctx.translate(-92, -96); ctx.scale(flip, 1);
         rr(ctx, -40, -18, 80, 36, 8, C.white, C.ink, 4);
         text(ctx, 'RETAIN', 0, -6, { size: 14, weight: 800, color: C.ink, letter: 1 });
         text(ctx, 'here to help', 0, 8, { size: 9, weight: 700, color: 'rgba(32,32,39,.55)' });

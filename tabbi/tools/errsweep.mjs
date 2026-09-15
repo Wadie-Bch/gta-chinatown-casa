@@ -5,7 +5,8 @@ const srv = await serve(8123);
 const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium', args: ['--hide-scrollbars', '--force-device-scale-factor=1'] });
 const p = await b.newPage({ viewport: { width: 1920, height: 1080 } });
 const pe = []; p.on('pageerror', e => pe.push(e.message));
-await p.goto('http://localhost:8123/preview.html?render=1', { waitUntil: 'networkidle' });
+const EP = (process.argv.find(v=>v.startsWith('--ep=')) || '--ep=1').split('=')[1];
+await p.goto(`http://localhost:8123/preview.html?render=1&ep=${EP}`, { waitUntil: 'networkidle' });
 await p.waitForFunction(() => window.__tabbi && window.__tabbi.ready, null, { timeout: 60000 });
 const t0 = Date.now();
 const res = await p.evaluate(() => {
