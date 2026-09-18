@@ -1,0 +1,14 @@
+{
+  "name": "dollar-survive-film",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Animated film: I Gave AI $1 And Told It To Survive",
+  "scripts": {
+    "start": "node tools/serve.mjs 8124",
+    "narration": "python3 tools/build_narration.py",
+    "test": "node tests/imports.mjs && node tests/smoke.mjs && node tests/legibility.mjs && node tests/transitions.mjs && node tests/densesweep.mjs",
+    "sheet": "node tests/sheet.mjs"
+  },
+  "devDependencies": { "playwright": "^1.49.1" }
+}

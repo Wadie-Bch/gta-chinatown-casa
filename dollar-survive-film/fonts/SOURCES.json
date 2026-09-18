@@ -1,0 +1,61 @@
+{
+ "note": "Latin subsets only, fetched from Google Fonts.",
+ "fonts": [
+  {
+   "family": "Barlow Condensed",
+   "weight": 600,
+   "file": "fonts/barlow-condensed-600.woff2",
+   "source": "https://fonts.gstatic.com/s/barlowcondensed/v13/HTxwL3I-JCGChYJ8VI-L6OO_au7B4873z3bWuQ.woff2",
+   "license": "SIL Open Font License 1.1"
+  },
+  {
+   "family": "Barlow Condensed",
+   "weight": 700,
+   "file": "fonts/barlow-condensed-700.woff2",
+   "source": "https://fonts.gstatic.com/s/barlowcondensed/v13/HTxwL3I-JCGChYJ8VI-L6OO_au7B46r2z3bWuQ.woff2",
+   "license": "SIL Open Font License 1.1"
+  },
+  {
+   "family": "IBM Plex Mono",
+   "weight": 500,
+   "file": "fonts/ibm-plex-mono-500.woff2",
+   "source": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F6qfjptAgt5VM-kVkqdyU8n3twJwlBFgg.woff2",
+   "license": "SIL Open Font License 1.1"
+  },
+  {
+   "family": "IBM Plex Mono",
+   "weight": 600,
+   "file": "fonts/ibm-plex-mono-600.woff2",
+   "source": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F6qfjptAgt5VM-kVkqdyU8n3vAOwlBFgg.woff2",
+   "license": "SIL Open Font License 1.1"
+  },
+  {
+   "family": "IBM Plex Mono",
+   "weight": 700,
+   "file": "fonts/ibm-plex-mono-700.woff2",
+   "source": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F6qfjptAgt5VM-kVkqdyU8n3pQPwlBFgg.woff2",
+   "license": "SIL Open Font License 1.1"
+  },
+  {
+   "family": "IBM Plex Sans",
+   "weight": 500,
+   "file": "fonts/ibm-plex-sans-500.woff2",
+   "source": "https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxeKYY.woff2",
+   "license": "SIL Open Font License 1.1"
+  },
+  {
+   "family": "IBM Plex Sans",
+   "weight": 600,
+   "file": "fonts/ibm-plex-sans-600.woff2",
+   "source": "https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxeKYY.woff2",
+   "license": "SIL Open Font License 1.1"
+  },
+  {
+   "family": "IBM Plex Sans",
+   "weight": 700,
+   "file": "fonts/ibm-plex-sans-700.woff2",
+   "source": "https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxeKYY.woff2",
+   "license": "SIL Open Font License 1.1"
+  }
+ ]
+}
