@@ -144,7 +144,11 @@ export function flush(ctx, scene) {
       it.sprite.draw(ctx, it.sprite.x, it.sprite.y, it.sprite.scale);
     } else {
       poly(ctx, it.pts, it.col, it.outline, it.outline ? 2 : 0);
-      if (it.deco) {
+      // onQuad-based decals (window grids etc.) assume a clean 4-point quad.
+      // Near-plane clipping can turn a face into a 3/5/6-point polygon when the
+      // camera sits very close to it; skip the decal rather than crash the
+      // whole shot — the geometry itself still draws correctly either way.
+      if (it.deco && it.pts.length === 4) {
         ctx.save();
         ctx.beginPath();
         ctx.moveTo(it.pts[0][0], it.pts[0][1]);

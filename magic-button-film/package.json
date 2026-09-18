@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node tools/serve.mjs 8123",
     "narration": "python3 tools/build_narration.py",
-    "test": "node tests/imports.mjs && node tests/smoke.mjs && node tests/behaviour.mjs && node tests/mobile.mjs && node tests/transitions.mjs && node tests/legibility.mjs && node tests/audio.mjs && node tests/sfxrender.mjs",
+    "test": "node tests/imports.mjs && node tests/smoke.mjs && node tests/behaviour.mjs && node tests/mobile.mjs && node tests/transitions.mjs && node tests/legibility.mjs && node tests/audio.mjs && node tests/sfxrender.mjs && node tests/densesweep.mjs",
     "frames": "node tests/frames.mjs",
     "sheet": "node tests/sheet.mjs"
   },
