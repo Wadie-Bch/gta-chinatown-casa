@@ -1,0 +1,167 @@
+{
+ "title": "Can AI Build a REAL Game With One Click?",
+ "language": "en",
+ "voice": "en-US-BrianNeural",
+ "rate": "-10%",
+ "pitch": "-2Hz",
+ "truthRules": [
+  "Everything shown is a simulated preview of a proposed test, not completed results.",
+  "No real model (Claude, ChatGPT, Grok) has been benchmarked here.",
+  "Chat interfaces are original and unbranded; simulated sequences are labelled SIMULATED.",
+  "No fabricated plan badges, model versions, benchmark numbers or success claims.",
+  "A browser game can be complete; a desktop executable can be unfinished.",
+  "No accusation that any reference channel fakes results."
+ ],
+ "leadIn": 1.1,
+ "tailOut": 4.5,
+ "segments": [
+  {
+   "id": "s01",
+   "chapter": "ch1",
+   "pauseAfter": 0.25,
+   "text": "The easiest part of building a game with AI might be making a video that says you built a game with AI. You write a prompt, click a button, and suddenly there's a character running through a beautiful little world."
+  },
+  {
+   "id": "s02",
+   "chapter": "ch1",
+   "pauseAfter": 1.8,
+   "text": "It looks like the future, especially if the video ends before anybody opens the settings menu. So here's the question I actually care about: can one click give you a complete game, or just enough game to make a convincing thumbnail?"
+  },
+  {
+   "id": "s03",
+   "chapter": "ch2",
+   "pauseAfter": 0.25,
+   "text": "Let's fix the words first. One button here does not mean a game you play with one button. It means one prompt, and one click on Send. Everything after that is supposed to be the machine's problem."
+  },
+  {
+   "id": "s04",
+   "chapter": "ch2",
+   "pauseAfter": 1.6,
+   "text": "Which is a beautiful idea, right up until the fourth time you're explaining why the jump key stopped working, and it slowly dawns on you that one click quietly hired you as unpaid technical support for your own game."
+  },
+  {
+   "id": "s05",
+   "chapter": "ch3",
+   "pauseAfter": 0.35,
+   "text": "So let's make the test small enough that it can actually be finished. A courier game. Collect three parcels, dodge the traffic, reach the delivery van. That is the entire design document. Small is the point, because small things can be complete."
+  },
+  {
+   "id": "s06",
+   "chapter": "ch3",
+   "pauseAfter": 1.0,
+   "text": "And before we go further: everything you're watching here is a simulated preview of that test. It illustrates the plan. It is not results from Claude, ChatGPT, or Grok. Nobody has run it yet, including me."
+  },
+  {
+   "id": "s07",
+   "chapter": "ch4",
+   "pauseAfter": 0.3,
+   "text": "Here's the distinction that matters. A prototype is the part that looks incredible in a fifteen second clip. A complete game is the part nobody films. The restart that actually restarts, the settings that survive a refresh, the loss state that doesn't leave you staring at a frozen courier."
+  },
+  {
+   "id": "s08",
+   "chapter": "ch4",
+   "pauseAfter": 1.1,
+   "text": "And to be clear, this is not browser versus desktop. A browser game can be completely, genuinely finished, and a desktop executable can be an unfinished mess in a heavier wrapper. The platform is not the quality test."
+  },
+  {
+   "id": "s09",
+   "chapter": "ch5",
+   "pauseAfter": 0.6,
+   "text": "So the ask is specific. A start screen, movement, pickups, a win state, a loss state, restart, pause, volume, a best score that survives closing the tab, and an export that opens. Ten things. None of them exotic."
+  },
+  {
+   "id": "s10",
+   "chapter": "ch5",
+   "pauseAfter": 1.2,
+   "text": "And one prompt does not mean one unit of work. A single press of Send can fan out into hundreds of tool calls, a lot of minutes, and a genuinely rude number of credits."
+  },
+  {
+   "id": "s11",
+   "chapter": "ch6",
+   "pauseAfter": 1.1,
+   "text": "A fair comparison needs the same starting project, the same feature list, and honest disclosure about which tools each model was allowed to reach. And the second a human steps in to fix something, that is no longer the one click build. That's a rescue phase, and it gets labelled as one."
+  },
+  {
+   "id": "s12",
+   "chapter": "ch7",
+   "pauseAfter": 1.8,
+   "text": "Here's why watching it move proves nothing. The courier moves beautifully. The traffic parts. The van is right there. And then the courier stops four pixels short, held in place by a collision box that exists only in spirit. Technically, a very small logistics dispute."
+  },
+  {
+   "id": "s13",
+   "chapter": "ch8",
+   "pauseAfter": 0.35,
+   "text": "So the real checks are boring on purpose. Lose on purpose, then restart. Does it reset, or just hide the body? Pause in the middle of traffic. Mute the audio. Close the tab, reopen it, and find out whether your best score remembers you."
+  },
+  {
+   "id": "s14",
+   "chapter": "ch8",
+   "pauseAfter": 1.8,
+   "text": "A pause menu that freezes you while the trucks keep driving isn't exactly a bug. Emotionally, it's a trap."
+  },
+  {
+   "id": "s15",
+   "chapter": "ch9",
+   "pauseAfter": 1.0,
+   "text": "And if you ever want to sell the thing, the list grows. It has to hold its frame rate on a laptop nobody is proud of, every asset needs a license you can point at, the controls need to be readable and remappable, and it has to package into something a stranger can open. For a game this small that's an afternoon, not a career. But somebody spends the afternoon."
+  },
+  {
+   "id": "s16",
+   "chapter": "ch10",
+   "pauseAfter": 1.2,
+   "text": "Which is why the receipts matter more than the demo. How many prompts. How many failures. How much actual clock time. Which tools it was allowed to touch. And how many lines a human quietly repaired while the recording was conveniently paused. A build that came out of one prompt, and a build that was carried across the line by a person, are two completely different stories."
+  },
+  {
+   "id": "s17",
+   "chapter": "ch11",
+   "pauseAfter": 0.0,
+   "text": "I'm not going to hand out a winner, because the test hasn't been run. Not by me, and not by anyone selling you a course about it. AI can genuinely delete an enormous amount of work, and that part is not hype. But deleting work and finishing work are different verbs. The magic button starts the job. Whether it finishes the job is the whole test."
+  }
+ ],
+ "chapters": [
+  {
+   "id": "ch1",
+   "label": "The Thumbnail Question"
+  },
+  {
+   "id": "ch2",
+   "label": "What One Button Means"
+  },
+  {
+   "id": "ch3",
+   "label": "The Courier Test"
+  },
+  {
+   "id": "ch4",
+   "label": "Prototype vs Complete"
+  },
+  {
+   "id": "ch5",
+   "label": "The Ten Things"
+  },
+  {
+   "id": "ch6",
+   "label": "A Fair Comparison"
+  },
+  {
+   "id": "ch7",
+   "label": "The Invisible Wall"
+  },
+  {
+   "id": "ch8",
+   "label": "The Boring Checks"
+  },
+  {
+   "id": "ch9",
+   "label": "Shipping It"
+  },
+  {
+   "id": "ch10",
+   "label": "Receipts"
+  },
+  {
+   "id": "ch11",
+   "label": "The Verdict"
+  }
+ ]
+}

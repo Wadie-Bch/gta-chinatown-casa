@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#11151D">
+<title>Can AI Build a REAL Game With One Click? — animated preview</title>
+<meta name="description" content="A 5-minute animated film about whether one prompt and one click can produce a complete small game. Simulated preview: no model was benchmarked.">
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/player.css">
+<link rel="preload" as="font" type="font/woff2" href="fonts/barlow-condensed-700.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="fonts/ibm-plex-sans-600.woff2" crossorigin>
+</head>
+<body>
+<div id="app">
+  <div id="stage" role="region" aria-label="Film player">
+    <canvas id="film" width="1600" height="900" aria-label="Animated film"></canvas>
+
+    <div id="poster">
+      <div class="poster-inner">
+        <p class="kicker">ANIMATED PREVIEW · SIMULATED</p>
+        <h1>Can AI Build a <em>REAL</em> Game<br>With One Click?</h1>
+        <p class="sub" id="posterSub">Loading narration…</p>
+        <div id="loadbar"><i></i></div>
+        <button id="bigPlay" type="button" disabled aria-label="Play the film">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M17 12l21 12-21 12z"/></svg>
+          <span>PLAY</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="notice" hidden></div>
+
+    <div id="chapters" hidden role="dialog" aria-label="Chapters">
+      <div class="chap-head">CHAPTERS</div>
+      <ol id="chapList"></ol>
+    </div>
+
+    <div id="controls">
+      <div class="seekwrap">
+        <div id="ticks" aria-hidden="true"></div>
+        <input id="seek" type="range" min="0" max="1000" value="0" step="1"
+               aria-label="Seek" aria-valuetext="0:00">
+        <div id="buffered" aria-hidden="true"></div>
+      </div>
+      <div class="btnrow">
+        <button id="play" class="ic" type="button" aria-label="Play" data-k="Space">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path class="pp" d="M8 5l12 7-12 7z"/></svg>
+        </button>
+        <button id="replay" class="ic" type="button" aria-label="Replay from start" data-k="R">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5V2L7 6l5 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z"/></svg>
+        </button>
+        <button id="mute" class="ic" type="button" aria-label="Mute" data-k="M">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path class="spk" d="M4 9v6h4l5 4V5L8 9z"/><path class="wave" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"/><path class="xx" d="M16 9l6 6M22 9l-6 6" /></svg>
+        </button>
+        <span id="time" class="time">0:00 / 0:00</span>
+        <span class="spacer"></span>
+        <button id="ccBtn" class="ic txt" type="button" aria-label="Captions off" aria-pressed="false" data-k="C">CC</button>
+        <button id="musicBtn" class="ic txt" type="button" aria-label="Music on" aria-pressed="true" data-k="B">♪</button>
+        <button id="chapBtn" class="ic txt" type="button" aria-label="Chapters" aria-expanded="false">CH</button>
+        <button id="rotBtn" class="ic" type="button" aria-label="Rotate view">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="12" height="10" rx="2"/><path d="M17 4v4h4"/><path d="M21 8a7 7 0 0 0-7-4"/></svg>
+        </button>
+        <button id="fsBtn" class="ic" type="button" aria-label="Fullscreen" data-k="F">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="module" src="js/player.js"></script>
+</body>
+</html>

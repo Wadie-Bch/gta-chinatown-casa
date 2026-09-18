@@ -1,0 +1,17 @@
+{
+  "name": "magic-button-film",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Browser-playable animated film: Can AI Build a REAL Game With One Click?",
+  "scripts": {
+    "start": "node tools/serve.mjs 8123",
+    "narration": "python3 tools/build_narration.py",
+    "test": "node tests/imports.mjs && node tests/smoke.mjs && node tests/behaviour.mjs && node tests/mobile.mjs && node tests/transitions.mjs && node tests/legibility.mjs && node tests/audio.mjs && node tests/sfxrender.mjs",
+    "frames": "node tests/frames.mjs",
+    "sheet": "node tests/sheet.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.1"
+  }
+}
