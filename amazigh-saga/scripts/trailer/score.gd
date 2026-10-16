@@ -152,7 +152,7 @@ static func _bp(freq: float, q: float) -> Vector3:
 static func braam(t0: float, dur: float, root_midi: float, gain: float) -> void:
 	var r := _range(t0, dur)
 	var f := hz(root_midi)
-	var parts := [[1.0, 1.0], [1.007, 0.9], [2.0, 0.7], [1.995, 0.6], [1.5, 0.35], [0.5, 0.8]]
+	var parts := [[1.0, 1.0], [1.007, 0.9], [2.0, 0.8], [1.995, 0.7], [3.0, 0.45], [4.0, 0.35], [0.5, 0.45]]
 	var ph := []
 	for p in parts:
 		ph.append(_rng.randf())
@@ -222,12 +222,30 @@ static func crash(t0: float, gain: float, dur: float = 2.2) -> void:
 		R[i] += o * (0.8 + 0.2 * _noise())
 
 
-## A trailer hit: sub boom, drum stack and crash.
+## Inharmonic metal strike in the 1-5 kHz range: what phone speakers can play.
+static func clang(t0: float, gain: float, pitch: float = 1.0) -> void:
+	var r := _range(t0, 1.0)
+	var freqs := [1180.0, 1720.0, 2630.0, 3390.0, 4410.0]
+	var amps := [0.5, 0.42, 0.32, 0.22, 0.15]
+	for i in range(r.x, r.y):
+		var tt := float(i - r.x) / RATE
+		var v := 0.0
+		for k in freqs.size():
+			v += sin(TAU * float(freqs[k]) * pitch * tt) * float(amps[k]) * exp(-tt * (6.0 + 3.0 * k))
+		v += _noise() * exp(-tt * 70.0) * 0.5
+		var o := v * gain * 0.5
+		L[i] += o * 1.05
+		R[i] += o * 0.95
+
+
+## A trailer hit: sub boom, drum stack, crash and a bright transient on top.
 static func hit(t0: float, gain: float) -> void:
-	sub_boom(t0, 0.9 * gain)
+	sub_boom(t0, 0.6 * gain)
 	taiko(t0, 0.9 * gain, 110.0, 42.0, 5.0, -0.2)
-	taiko(t0 + 0.012, 0.7 * gain, 160.0, 60.0, 9.0, 0.25)
-	crash(t0, 0.5 * gain)
+	taiko(t0 + 0.012, 0.75 * gain, 170.0, 70.0, 9.0, 0.25)
+	crash(t0, 0.75 * gain)
+	clang(t0, 0.45 * gain, 0.9 + 0.2 * _rng.randf())
+	tek(t0, 0.5 * gain, 0.0)
 
 
 static func doum(t0: float, gain: float) -> void:
@@ -375,7 +393,8 @@ static func reverse_swell(t_end: float, dur: float, gain: float) -> void:
 static func _compose() -> void:
 	# ---- 0–4 THE OMEN: drone, eerie choir, stars going out, harbinger braam
 	pad(0.0, 4.0, [38, 45], 0.3, 220.0, 1.2, 0.4, 700.0)
-	choir(0.9, 3.0, [62, 69], 0.1, 1.5, 0.6)
+	bells(0.08, [86, 93], 0.12, 0.09)
+	choir(0.3, 3.6, [62, 69], 0.12, 1.2, 0.6)
 	choir(2.2, 1.7, [63], 0.07, 1.0, 0.4)
 	var star_notes := [86, 81, 89, 86, 81, 77]
 	for i in star_notes.size():
@@ -404,10 +423,10 @@ static func _compose() -> void:
 	reverse_swell(10.0, 1.0, 0.3)
 
 	# ---- 10–12 THE INVASION: landing hits, ostinato, drum roll
-	hit(10.0, 1.0)
+	hit(10.0, 0.8)
 	braam(10.0, 1.4, 38, 0.3)
 	for lt: float in [10.45, 10.95, 11.45]:
-		hit(lt, 0.75)
+		hit(lt, 0.55)
 	var pat := [50, 50, 53, 50, 51, 50, 49, 50]
 	var st := 10.0
 	var k := 0
@@ -442,6 +461,7 @@ static func _compose() -> void:
 				tek(tt, 0.12 if s16 % 2 == 1 else 0.18, 0.3 if s16 % 2 == 0 else -0.3)
 		braam(b0, 0.45, 38 if b != 2 else 43, 0.22)
 	choir(16.0, 3.8, [50, 57, 62], 0.08, 1.5, 0.4)
+	pad(12.0, 7.9, [50, 57], 0.2, 900.0, 0.3, 0.2)
 	for s: float in COMBAT_STINGERS:
 		hit(s, 0.45)
 	riser(19.0, 1.0, 0.3)
@@ -465,8 +485,10 @@ static func _compose() -> void:
 	reverse_swell(29.0, 1.0, 0.32)
 
 	# ---- 29–37.3 FINAL MONTAGE: driving 16ths, hits on every cut, finisher
-	for ct: float in [29.0, 30.0, 30.9, 31.9, 32.8, 33.6]:
-		hit(ct, 0.8)
+	hit(29.0, 1.0)
+	taiko(29.0, 0.7, 120.0, 45.0, 5.0, 0.0)
+	for ct: float in [30.0, 30.9, 31.9, 32.8, 33.6]:
+		hit(ct, 0.75)
 	hit(31.3, 0.7)
 	hit(32.32, 0.6)
 	braam(29.0, 1.0, 38, 0.3)
@@ -475,7 +497,7 @@ static func _compose() -> void:
 	var mk := 0
 	var mpat := [50, 50, 53, 50, 51, 50, 49, 50, 50, 53, 55, 57, 58, 57, 55, 53]
 	while mt < 37.15:
-		stac(mt, float(mpat[mk % 16]), 0.13, 0.1, -0.3 if mk % 2 == 0 else 0.3)
+		stac(mt, float(mpat[mk % 16]), 0.13 if mt < 33.6 else 0.09, 0.1, -0.3 if mk % 2 == 0 else 0.3)
 		if mk % 4 == 0:
 			doum(mt, 0.3)
 		else:
@@ -485,15 +507,18 @@ static func _compose() -> void:
 		mt += 0.125
 		mk += 1
 	pad(29.0, 4.6, [38, 50], 0.28, 400.0, 0.1, 0.4)
-	choir(33.6, 3.5, [50, 57, 62, 65, 69], 0.14, 0.6, 0.3)
-	ney([[34.0, 0.6, 74], [34.6, 0.35, 75], [34.95, 0.35, 74], [35.3, 0.4, 73], [35.7, 1.1, 74]], 0.17)
+	choir(33.6, 3.5, [50, 57, 62, 65, 69], 0.08, 0.6, 0.3)
+	ney([[34.0, 0.6, 74], [34.6, 0.35, 75], [34.95, 0.35, 74], [35.3, 0.4, 73], [35.7, 1.1, 74]], 0.11)
 	hit(FINISHER_STRIKE, 1.0)
 	braam(FINISHER_STRIKE, 1.8, 38, 0.45)
-	riser(36.3, 1.0, 0.32)
+	riser(35.9, 1.4, 0.42)
+	choir(35.8, 1.45, [57, 62, 69], 0.13, 0.4, 0.05)
 	reverse_swell(37.6, 0.35, 0.35)
 
 	# ---- 37.6– TITLE: final hit, D major (Hijaz tonic) ring-out, ney cadence
-	hit(37.6, 1.15)
+	hit(37.6, 1.3)
+	clang(37.6, 0.6, 0.75)
+	crash(37.6, 0.6, 3.0)
 	braam(37.6, 3.6, 38, 0.6)
 	choir(37.6, 3.6, [50, 54, 57, 62, 66, 69], 0.16, 0.15, 1.2)
 	pad(37.6, 3.4, [38, 50, 54, 57, 62], 0.3, 1200.0, 0.1, 1.2)
@@ -512,8 +537,10 @@ static func _master() -> AudioStreamWAV:
 		var g := 1.0
 		if i >= gap0 and i < gap1:
 			g = maxf(1.0 - float(i - gap0) / (0.03 * RATE), 0.0)
-		if tt > 40.6:
-			g *= clampf(1.0 - (tt - 40.6) / 1.6, 0.0, 1.0)
+		if tt > FINISHER_STRIKE - 0.22 and tt < FINISHER_STRIKE:
+			g *= 0.35
+		if tt > 40.8:
+			g *= pow(clampf(1.0 - (tt - 40.8) / 1.05, 0.0, 1.0), 1.6)
 		if tt < 0.02:
 			g *= tt / 0.02
 		L[i] = tanh(L[i] * 1.1) * g

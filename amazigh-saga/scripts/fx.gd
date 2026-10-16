@@ -7,6 +7,8 @@ static var inst: FX
 
 ## Only the gameplay FX layer drives hit-stop / slow motion through Engine.time_scale.
 var drives_time := true
+## Floating damage numbers (the trailer hides them to keep the frame clean).
+var damage_numbers := true
 var camera_rig: CameraRig
 var hud: Hud
 var title_font: Font
@@ -199,6 +201,8 @@ func impact_light(pos: Vector3, color: Color, energy: float = 4.0, duration: flo
 
 
 func damage_number(pos: Vector3, amount: float, color: Color, big: bool = false) -> void:
+	if not damage_numbers:
+		return
 	var lbl := Label3D.new()
 	lbl.text = str(int(round(amount)))
 	if title_font:

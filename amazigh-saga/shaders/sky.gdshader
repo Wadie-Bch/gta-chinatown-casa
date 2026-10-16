@@ -12,6 +12,7 @@ uniform vec3 rift_col : source_color = vec3(0.45, 0.35, 1.0);
 // Trailer controls (defaults leave the game's sky unchanged).
 uniform float darkness = 0.0;
 uniform float star_fade = 0.0;
+uniform float sunset = 0.0;
 uniform vec3 omen_tint : source_color = vec3(0.16, 0.08, 0.24);
 
 float hash3(vec3 p) {
@@ -29,6 +30,8 @@ void sky() {
 		col = mix(haze, horizon, smoothstep(0.0, 0.08, t));
 		col = mix(col, upper, smoothstep(0.08, 0.55, t));
 		col = mix(col, zenith, smoothstep(0.55, 1.0, t));
+		vec3 warm = mix(vec3(1.0, 0.5, 0.3), vec3(0.6, 0.28, 0.42), smoothstep(0.05, 0.55, t));
+		col = mix(col, warm, sunset * (1.0 - smoothstep(0.0, 0.8, t)) * 0.85);
 		float sd = max(dot(d, LIGHT0_DIRECTION), 0.0);
 		col += vec3(1.0, 0.55, 0.25) * pow(sd, 6.0) * 0.55 * (1.0 - t);
 		col += vec3(1.0, 0.86, 0.62) * smoothstep(0.9990, 0.9996, sd) * 3.0;

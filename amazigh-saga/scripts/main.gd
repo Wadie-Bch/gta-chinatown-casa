@@ -68,6 +68,7 @@ func _ready() -> void:
 	fx.camera_rig = camera_rig
 	fx.hud = hud
 	fx.title_font = hud.title_font
+	fx.damage_numbers = not config["trailer"]
 
 	player.health_changed.connect(hud.set_player_health)
 	enemy.health_changed.connect(hud.set_boss_health)
@@ -308,7 +309,7 @@ func _finisher_impact() -> void:
 	var hit := p.lerp(head, 0.5)
 	fx.hit_stop(0.16)
 	fx.slowmo(0.3, 0.85)
-	fx.flash(Color(1.0, 0.95, 0.85, 0.55), 0.35)
+	fx.flash(Color(1.0, 0.95, 0.85, 0.28 if config["trailer"] else 0.55), 0.35)
 	fx.sparks(hit, Color(1.0, 0.8, 0.4), 60)
 	fx.ichor(hit, Vector3.UP + (head - p).normalized(), 70)
 	fx.shockwave(Vector3(hit.x, 0.05, hit.z), Color(0.4, 1.0, 0.95), 7.5, 0.7)
