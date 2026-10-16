@@ -604,17 +604,17 @@ func _build_overlay() -> void:
 	pill.content_margin_bottom = 5
 	tag.add_theme_stylebox_override("normal", pill)
 
-	# Captions: [t0, t1, text, size, color, y]
+	# Captions: [t0, t1, text, size, color, y, (fade_in, fade_out)]
 	var caps := [
 		[0.9, 3.45, "THE STARS ARE\nGOING OUT", 44, Color(0.86, 0.92, 1.0), 0.30],
 		[4.7, 6.15, "AMASTAN", 92, Color(1.0, 0.84, 0.5), 0.70],
 		[4.95, 6.15, "LAST GUARDIAN OF THE ATLAS", 25, Color(0.95, 0.9, 0.82), 0.775],
-		[7.85, 8.6, "THEY TOOK EVERYTHING", 42, Color(1.0, 0.86, 0.7), 0.30],
+		[7.8, 8.74, "THEY TOOK EVERYTHING", 42, Color(1.0, 0.86, 0.7), 0.30, 0.1, 0.14],
 		[8.8, 9.95, "ONLY VENGEANCE\nREMAINS", 44, Color(1.0, 0.84, 0.5), 0.74],
 		[10.15, 11.75, "THE INVASION\nHAS BEGUN", 44, Color(0.75, 1.0, 0.96), 0.24],
 		[21.3, 23.1, "THE STAR EATER", 60, Color(0.7, 1.0, 0.96), 0.73],
 		[24.2, 25.9, "IT HUNTS THE POWER\nSEALED BENEATH THE ATLAS", 36, Color(0.92, 0.9, 1.0), 0.80],
-		[27.75, 28.95, "HIS BLADE BURNS\nWITH THE SAME LIGHT", 38, Color(0.7, 1.0, 0.96), 0.24],
+		[27.62, 29.0, "HIS BLADE BURNS\nWITH THE SAME LIGHT", 38, Color(0.7, 1.0, 0.96), 0.24, 0.12, 0.1],
 	]
 	for c: Array in caps:
 		var y := 1280.0 * float(c[5])
@@ -626,7 +626,8 @@ func _build_overlay() -> void:
 		l.position = Vector2(0, y - 100.0)
 		l.pivot_offset = l.size * 0.5
 		l.modulate.a = 0.0
-		_captions.append([float(c[0]), float(c[1]), l, back])
+		var fades := [float(c[6]), float(c[7])] if c.size() > 7 else [0.28, 0.3]
+		_captions.append([float(c[0]), float(c[1]), l, back, fades[0], fades[1]])
 
 	_title_backdrop = _backdrop(root, 200.0, 380.0)
 	_title_backdrop.modulate.a = 0.0
@@ -757,7 +758,7 @@ func _update_overlay() -> void:
 			l.modulate.a = 0.0
 			back.modulate.a = 0.0
 			continue
-		var a := minf(clampf((t - t0) / 0.28, 0.0, 1.0), clampf((t1 - t) / 0.3, 0.0, 1.0))
+		var a := minf(clampf((t - t0) / float(c[4]), 0.0, 1.0), clampf((t1 - t) / float(c[5]), 0.0, 1.0))
 		l.modulate.a = a
 		back.modulate.a = a
 		var k := clampf((t - t0) / (t1 - t0), 0.0, 1.0)
@@ -1429,6 +1430,11 @@ func _shot_finisher(lt: float, u: float) -> void:
 		var p := game.player.global_position
 		var k := clampf((t - 36.5) / 0.8, 0.0, 1.0)
 		var first := not game_cam.current
+		if first:
+			# The close-up cut must not open on a cropped in-world call-out.
+			for n in game.fx.get_children():
+				if n is Label3D:
+					n.visible = false
 		# Beside the dissolving creature, never inside it.
 		_place_game_cam(p + fwd * lerpf(1.5, 1.2, k) + side * 1.5 + Vector3.UP * 0.55, p + Vector3.UP * 1.6, 50.0, 1.0 if first else 0.25)
 
