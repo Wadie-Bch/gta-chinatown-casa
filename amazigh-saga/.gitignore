@@ -1,0 +1,5 @@
+# Godot generated data
+.godot/
+*.import.tmp
+# Raw frame dumps from the movie render (the encoded MP4 is kept)
+output/frames/

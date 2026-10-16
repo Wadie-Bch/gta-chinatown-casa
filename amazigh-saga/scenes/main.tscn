@@ -1,0 +1,39 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="Script" path="res://scripts/arena.gd" id="2_arena"]
+[ext_resource type="PackedScene" path="res://scenes/warrior.tscn" id="3_warrior"]
+[ext_resource type="PackedScene" path="res://scenes/star_eater.tscn" id="4_alien"]
+[ext_resource type="Script" path="res://scripts/camera_rig.gd" id="5_cam"]
+[ext_resource type="Script" path="res://scripts/fx.gd" id="6_fx"]
+[ext_resource type="Script" path="res://scripts/hud.gd" id="7_hud"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_main")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+
+[node name="RimLight" type="DirectionalLight3D" parent="."]
+
+[node name="Arena" type="Node3D" parent="."]
+script = ExtResource("2_arena")
+
+[node name="Warrior" parent="." instance=ExtResource("3_warrior")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[node name="StarEater" parent="." instance=ExtResource("4_alien")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+
+[node name="CameraRig" type="Node3D" parent="."]
+script = ExtResource("5_cam")
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig"]
+current = true
+
+[node name="FX" type="Node3D" parent="."]
+script = ExtResource("6_fx")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("7_hud")
