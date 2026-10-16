@@ -198,6 +198,9 @@ const ANIMS := {
 var hp := MAX_HP
 var state := State.FREE
 var locked := true
+## When true (trailer staging), CINEMATIC state keeps the velocity set by the
+## director so the cape still reacts to scripted movement.
+var cine_driven := false
 var enemy: StarEater
 var camera_rig: CameraRig
 var joints := {}
@@ -502,7 +505,8 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0.0, 10.0 * delta)
 			velocity.z = move_toward(velocity.z, 0.0, 10.0 * delta)
 		State.CINEMATIC:
-			velocity = Vector3.ZERO
+			if not cine_driven:
+				velocity = Vector3.ZERO
 			_update_cloth(delta)
 			return
 

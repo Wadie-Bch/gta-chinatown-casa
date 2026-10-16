@@ -5,6 +5,8 @@ extends Node3D
 
 static var inst: FX
 
+## Only the gameplay FX layer drives hit-stop / slow motion through Engine.time_scale.
+var drives_time := true
 var camera_rig: CameraRig
 var hud: Hud
 var title_font: Font
@@ -24,7 +26,8 @@ func _enter_tree() -> void:
 func _exit_tree() -> void:
 	if inst == self:
 		inst = null
-	Engine.time_scale = 1.0
+	if drives_time:
+		Engine.time_scale = 1.0
 
 
 func _ready() -> void:
@@ -53,7 +56,8 @@ func _process(delta: float) -> void:
 		_slow_left -= rdt
 		if _slow_left <= 0.0:
 			_slow_scale = 1.0
-	Engine.time_scale = 0.04 if _hitstop > 0.0 else _slow_scale
+	if drives_time:
+		Engine.time_scale = 0.04 if _hitstop > 0.0 else _slow_scale
 
 
 func hit_stop(duration: float) -> void:

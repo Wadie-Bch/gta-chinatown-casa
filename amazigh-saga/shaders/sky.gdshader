@@ -9,6 +9,10 @@ uniform vec3 haze : source_color = vec3(0.98, 0.74, 0.50);
 uniform vec3 ground : source_color = vec3(0.26, 0.15, 0.10);
 uniform vec3 rift_dir = vec3(0.0, 0.42, -0.91);
 uniform vec3 rift_col : source_color = vec3(0.45, 0.35, 1.0);
+// Trailer controls (defaults leave the game's sky unchanged).
+uniform float darkness = 0.0;
+uniform float star_fade = 0.0;
+uniform vec3 omen_tint : source_color = vec3(0.16, 0.08, 0.24);
 
 float hash3(vec3 p) {
 	p = fract(p * 0.3183099 + 0.1);
@@ -33,6 +37,7 @@ void sky() {
 		vec3 cell = floor(sp);
 		float r = hash3(cell);
 		float star = step(0.986, r) * smoothstep(0.42, 0.0, length(fract(sp) - 0.5));
+		star *= step(star_fade, hash3(cell + 31.0));
 		col += vec3(0.85, 0.92, 1.0) * star * smoothstep(0.18, 0.65, h) * (0.6 + 1.4 * hash3(cell + 7.0));
 		// Glow around the rift.
 		float rd = max(dot(d, normalize(rift_dir)), 0.0);
@@ -40,5 +45,7 @@ void sky() {
 	} else {
 		col = mix(haze * 0.85, ground, smoothstep(0.0, 0.2, -h));
 	}
+	vec3 omen = mix(omen_tint, omen_tint * 0.35, smoothstep(-0.1, 0.6, h));
+	col = mix(col, omen + col * 0.12, darkness);
 	COLOR = col;
 }

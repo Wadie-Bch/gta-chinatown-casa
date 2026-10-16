@@ -30,6 +30,10 @@ var config := {
 	"hitboxes": false,
 	"quit_after_end": -1.0,
 	"log": false,
+	# Set by the trailer when the game runs inside a SubViewport: layout follows
+	# that viewport, and the HUD keeps only combat call-outs (no bars or music).
+	"embedded": false,
+	"trailer": false,
 }
 var state := GameState.INTRO
 var clock := 0.0
@@ -89,14 +93,17 @@ func _ready() -> void:
 	hud.touch_mode = touch.visible
 	hud.set_portrait(hud.portrait)
 
-	if config["portrait"] == "on" and DisplayServer.get_name() != "headless":
+	if config["portrait"] == "on" and DisplayServer.get_name() != "headless" and not config["embedded"]:
 		var win := get_window()
 		if win.size.x > win.size.y and not win.mode in [Window.MODE_FULLSCREEN, Window.MODE_EXCLUSIVE_FULLSCREEN]:
 			var screen := DisplayServer.screen_get_size()
 			var h := int(screen.y * 0.86)
 			win.size = Vector2i(int(h * 9.0 / 16.0), h)
 			win.move_to_center()
-	get_window().size_changed.connect(_update_layout)
+	if config["embedded"]:
+		get_viewport().size_changed.connect(_update_layout)
+	else:
+		get_window().size_changed.connect(_update_layout)
 	_update_layout()
 
 	if config["hitboxes"]:
@@ -139,16 +146,21 @@ func _parse_args() -> void:
 
 
 func _update_layout() -> void:
-	var win := get_window()
 	var mode: String = config["portrait"]
-	var p := win.size.y > win.size.x
+	var p: bool
+	if config["embedded"]:
+		var vs := get_viewport().get_visible_rect().size
+		p = vs.y > vs.x
+	else:
+		var win := get_window()
+		p = win.size.y > win.size.x
+		var base := Vector2i(720, 1280) if (p or mode == "on") and mode != "off" else Vector2i(1280, 720)
+		if win.content_scale_size != base:
+			win.content_scale_size = base
 	if mode == "on":
 		p = true
 	elif mode == "off":
 		p = false
-	var base := Vector2i(720, 1280) if p else Vector2i(1280, 720)
-	if win.content_scale_size != base:
-		win.content_scale_size = base
 	if p == portrait and hud.portrait == p:
 		return
 	portrait = p
@@ -191,7 +203,7 @@ func _on_enemy_landed() -> void:
 	Sfx.play("boom", 2.0)
 	Sfx.play("roar", -1.0, 0.9)
 	arena.hide_beam(0.5)
-	hud.set_bars_visible(true)
+	hud.set_bars_visible(not config["trailer"])
 
 
 func _start_fight() -> void:
@@ -204,21 +216,22 @@ func _start_fight() -> void:
 		enemy.start_fight()
 	else:
 		enemy.state = StarEater.State.STALK
-	Sfx.start_music()
+	if not config["trailer"]:
+		Sfx.start_music()
 
 
 func _skip_intro() -> void:
 	enemy.global_position = Vector3(0, 0, -3.0)
 	enemy.rotation.y = PI
 	enemy.land_intro()
-	hud.set_bars_visible(true)
+	hud.set_bars_visible(not config["trailer"], config["trailer"])
 	camera_rig.snap()
 	state = GameState.INTRO
 	_start_fight()
 
 
 func _on_landed_hit(result: String, _damage: float) -> void:
-	if result in ["hit", "stagger", "kill"]:
+	if result in ["hit", "stagger", "kill"] and not config["trailer"]:
 		hud.register_hit()
 
 
@@ -241,7 +254,8 @@ func _on_enemy_defeated() -> void:
 	hud.message("BROKEN!", Color(1.0, 0.5, 0.35), 0.5, 70)
 	fx.slowmo(0.45, 0.35)
 	var t := "TAP LIGHT  —  FINISH IT" if touch_enabled else "[ K ]  FINISH IT"
-	hud.show_prompt(t)
+	if not config["trailer"]:
+		hud.show_prompt(t)
 
 
 func _start_finisher() -> void:
@@ -249,7 +263,7 @@ func _start_finisher() -> void:
 		return
 	state = GameState.FINISHER
 	hud.hide_prompt()
-	hud.set_letterbox(true)
+	hud.set_letterbox(not config["trailer"])
 	hud.set_bars_visible(false)
 	Sfx.set_music_volume(-18.0)
 	var e_pos := enemy.global_position
@@ -288,6 +302,7 @@ func _start_finisher() -> void:
 
 
 func _finisher_impact() -> void:
+	log_event("finisher impact")
 	var p := player.axe_head_position()
 	var head := enemy.head_position()
 	var hit := p.lerp(head, 0.5)
@@ -315,7 +330,8 @@ func _on_victory() -> void:
 	state = GameState.VICTORY
 	log_event("VICTORY")
 	hud.set_letterbox(false)
-	hud.show_end(true, touch_enabled)
+	if not config["trailer"]:
+		hud.show_end(true, touch_enabled)
 	player.play_victory()
 	camera_rig.clear_cinematic(1.4)
 	camera_rig.orbit_mode = true

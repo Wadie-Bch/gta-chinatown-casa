@@ -41,6 +41,11 @@ func play(sound: String, volume_db: float = 0.0, pitch: float = 1.0) -> void:
 	p.play()
 
 
+func set_bus(bus_name: String) -> void:
+	for p in _players:
+		p.bus = bus_name
+
+
 func start_music() -> void:
 	if streams.has("drums") and not _music.playing:
 		_music.stream = streams["drums"]
